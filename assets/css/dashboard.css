@@ -181,3 +181,19 @@ table.dataTable tbody tr:hover {
 }
 
 
+/* Highlight severity */
+td span {
+    padding: 3px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Specific colors */
+td span.green { background-color: #d1fae5; color: #065f46; }
+td span.orange { background-color: #ffedd5; color: #b45309; }
+td span.red { background-color: #fee2e2; color: #991b1b; }
+
+/* Optional: bold important data */
+td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+    font-weight: 600;
+}

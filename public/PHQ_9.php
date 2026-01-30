@@ -184,19 +184,6 @@
 
         <!-- SIGNATURE -->
         <div class="footer">
-            <div>
-                Attending Physician:
-                <input type="text" name="physician" class="text-input">
-            </div>
-            <div>
-                License No:
-                <input type="text" name="license_no" class="text-input">
-            </div>
-            <div>
-                Date:
-                <input type="date" name="physician_date" class="text-input small">
-            </div>
-
             <span class="phu-form">PHU-F-32-00</span>
         </div>
 
@@ -205,6 +192,76 @@
         </div>
     </div>
 
+    <div id="resultModal" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+
+            <h2 class="modal-title">PHQ-9 Assessment Result</h2>
+
+            <div class="result-summary">
+                <div>
+                    <span class="label">Total Score</span>
+                    <span id="resultScore" class="score-value"></span>
+                </div>
+                <div>
+                    <span class="label">Severity</span>
+                    <span id="resultSeverity" class="severity-badge"></span>
+                </div>
+            </div>
+
+            <table class="severity-table">
+                <thead>
+                    <tr>
+                        <th>Score Range</th>
+                        <th>Depression Severity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-min="0" data-max="4"><td>0–4</td><td>Minimal</td></tr>
+                    <tr data-min="5" data-max="9"><td>5–9</td><td>Mild</td></tr>
+                    <tr data-min="10" data-max="14"><td>10–14</td><td>Moderate</td></tr>
+                    <tr data-min="15" data-max="19"><td>15–19</td><td>Moderately Severe</td></tr>
+                    <tr data-min="20" data-max="27"><td>20–27</td><td>Severe</td></tr>
+                </tbody>
+            </table>
+
+            <!-- CONSENT -->
+            <div id="consentSection" class="consent-section" style="display:none;">
+                <p class="alert-text">
+                    This result indicates <strong>moderate to severe depression</strong>.
+                </p>
+
+                <p class="disclaimer-text">
+                    Your data is confidential. You may optionally provide your mobile number
+                    so a health professional can contact you for support.
+                </p>
+
+                <div class="consent-options">
+                    <label>
+                        <input type="radio" name="consentChoice" value="agree">
+                        <span>I agree</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="consentChoice" value="decline">
+                        <span>No thanks</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="contactSection" class="contact-section" style="display:none;">
+                <label for="contactNumber">Mobile Number (Optional)</label>
+                <input type="text" id="contactNumber" placeholder="09XXXXXXXXX">
+            </div>
+
+            <button id="confirmSubmit" class="btn-primary" disabled>
+                Confirm & Save
+            </button>
+
+        </div>
+    </div>
+
+
     <script src="../assets/js/PHQ_9.js"></script>
+
+    
 </body>
 </html>

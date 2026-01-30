@@ -17,11 +17,6 @@ const populate_sample_gad7 = (i) => {
     // ====== FUNCTIONAL DIFFICULTY ======
     $('input[name="difficulty"][value="1"]').prop('checked', true); // Somewhat difficult
 
-    // ====== SIGNATURE ======
-    $('input[name="physician"]').val('Dr. Maria Santos');
-    $('input[name="license_no"]').val('12345-DOH');
-    $('input[name="physician_date"]').val('2026-01-28');
-
     // ====== TOTAL SCORE (optional calculation trigger) ======
     if($('#totalScore').length) {
         $('input[type="radio"]').first().trigger('change'); // trigger recalculation
@@ -190,9 +185,6 @@ $(document).ready(function () {
         }
 
         formData.difficulty = $('input[name="difficulty"]:checked').val() || 0;
-        formData.physician = $('input[name="physician"]').val();
-        formData.license_no = $('input[name="license_no"]').val();
-        formData.physician_date = $('input[name="physician_date"]').val();
 
         formData.total_score = $('#resultScore').text();
         formData.severity = $('#resultSeverity').text();
@@ -207,6 +199,8 @@ $(document).ready(function () {
                 $('#resultModal').fadeOut();
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
+
+                window.location.href = 'http://192.168.42.15:8035/';
             }
         });
     });

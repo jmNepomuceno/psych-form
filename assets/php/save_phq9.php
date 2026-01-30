@@ -7,6 +7,8 @@ try {
     $patient_name   = $_POST['patient_name'] ?? '';
     $age_sex        = $_POST['age_sex'] ?? '';
     $exam_date      = $_POST['exam_date'] ?? null;
+    $severity       = $_POST['severity'] ?? '';
+    $contact_number = $_POST['contact_number'] ?? null;
 
     $q1 = isset($_POST['q1']) ? (int)$_POST['q1'] : 0;
     $q2 = isset($_POST['q2']) ? (int)$_POST['q2'] : 0;
@@ -18,25 +20,27 @@ try {
     $q8 = isset($_POST['q8']) ? (int)$_POST['q8'] : 0;
     $q9 = isset($_POST['q9']) ? (int)$_POST['q9'] : 0;
 
-    $difficulty      = isset($_POST['difficulty']) ? (int)$_POST['difficulty'] : 0;
-    $total_score     = isset($_POST['total_score']) ? (int)$_POST['total_score'] : 0;
+    $difficulty  = isset($_POST['difficulty']) ? (int)$_POST['difficulty'] : 0;
+    $total_score = isset($_POST['total_score']) ? (int)$_POST['total_score'] : 0;
 
-    $physician       = $_POST['physician'] ?? '';
-    $license_no      = $_POST['license_no'] ?? '';
-    $physician_date  = $_POST['physician_date'] ?? null;
+    $physician      = $_POST['physician'] ?? '';
+    $license_no     = $_POST['license_no'] ?? '';
+    $physician_date = $_POST['physician_date'] ?? null;
 
     // ====== INSERT QUERY ======
     $sql = "INSERT INTO phq_9 (
-                patient_name, age_sex, exam_date,
-                q1, q2, q3, q4, q5, q6, q7, q8, q9,
-                difficulty, total_score,
-                physician, license_no, physician_date
-            ) VALUES (
-                :patient_name, :age_sex, :exam_date,
-                :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9,
-                :difficulty, :total_score,
-                :physician, :license_no, :physician_date
-            )";
+        patient_name, age_sex, exam_date,
+        q1, q2, q3, q4, q5, q6, q7, q8, q9,
+        difficulty, total_score,
+        physician, license_no, physician_date,
+        severity, contact_number
+    ) VALUES (
+        :patient_name, :age_sex, :exam_date,
+        :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9,
+        :difficulty, :total_score,
+        :physician, :license_no, :physician_date,
+        :severity, :contact_number
+    )";
 
     $stmt = $pdo->prepare($sql);
 
@@ -58,12 +62,20 @@ try {
     $stmt->bindParam(':physician', $physician, PDO::PARAM_STR);
     $stmt->bindParam(':license_no', $license_no, PDO::PARAM_STR);
     $stmt->bindParam(':physician_date', $physician_date);
+    $stmt->bindParam(':severity', $severity, PDO::PARAM_STR);
+    $stmt->bindParam(':contact_number', $contact_number, PDO::PARAM_STR);
 
     // ====== EXECUTE QUERY ======
     $stmt->execute();
 
-    echo json_encode(['success' => true, 'message' => 'PHQ-9 form saved successfully!']);
+    echo json_encode([
+        'success' => true,
+        'message' => 'PHQ-9 form saved successfully!'
+    ]);
 
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    echo json_encode([
+        'success' => false,
+        'message' => $e->getMessage()
+    ]);
 }

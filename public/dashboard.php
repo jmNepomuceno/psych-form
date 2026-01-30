@@ -18,12 +18,14 @@
         <div class="table-card">
             <h2>PHQ-9 Submissions</h2>
             <table id="phqTable" class="display" style="width:100%">
-                <thead>
+                 <thead>
                     <tr>
                         <th>No.</th>
                         <th>Full Name</th>
-                        <th>Date Submitted</th>
+                        <th>Contact Number</th>
                         <th>Total Score</th>
+                        <th>Severity</th>
+                        <th>Date Submitted</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -38,12 +40,15 @@
                     <tr>
                         <th>No.</th>
                         <th>Full Name</th>
-                        <th>Date Submitted</th>
+                        <th>Contact Number</th>
                         <th>Total Score</th>
+                        <th>Severity</th>
+                        <th>Date Submitted</th>
                         <th>Action</th>
                     </tr>
                 </thead>
             </table>
+
         </div>
     </div>
 

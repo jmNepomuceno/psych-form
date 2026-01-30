@@ -169,19 +169,6 @@
 
         <!-- SIGNATURE -->
         <div class="footer">
-            <div>
-                Attending Physician:
-                <input type="text" name="physician" class="text-input">
-            </div>
-            <div>
-                License No:
-                <input type="text" name="license_no" class="text-input">
-            </div>
-            <div>
-                Date:
-                <input type="date" name="physician_date" class="text-input small">
-            </div>
-
             <span class="phu-form">PHU-F-33-00</span>
         </div>
 
