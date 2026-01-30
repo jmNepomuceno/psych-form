@@ -9,19 +9,19 @@
     // $result = $soap->GetESignature($param)->GetESignatureResult;
     // echo "<pre>"; print_r($result); echo "</pre>";
 
-    $sql = "SELECT * FROM phq_9";
+    $sql = "describe fagerstrom_test";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo '<pre>'; print_r($data); echo '</pre>';
 
-    $sql = "SELECT * FROM gad_7";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    // $sql = "SELECT * FROM gad_7";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 
-    $data_2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo '<pre>'; print_r($data_2); echo '</pre>';
+    // $data_2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // echo '<pre>'; print_r($data_2); echo '</pre>';
 
     // echo '<pre>';
     // print_r($columns);

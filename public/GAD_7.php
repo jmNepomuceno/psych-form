@@ -246,8 +246,6 @@
     </div>
 
 
-
-
     <script src="../assets/js/GAD_7.js"></script>
 </body>
 </html>

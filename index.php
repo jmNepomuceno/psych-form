@@ -41,6 +41,18 @@
                 <a href="./public/PHQ_9.php">Open PHQ-9 Form</a>
             </div>
 
+            <!-- Fagerström Test for Nicotine Dependence -->
+            <div class="dashboard-card">
+                <h2>Fagerström Test (FTND)</h2>
+                <p>
+                    The Fagerström Test for Nicotine Dependence is a standardized screening
+                    tool used to assess the level of physical dependence on nicotine among
+                    tobacco users.
+                </p>
+                <a href="./public/FTND.php">Open Fagerström Test</a>
+            </div>
+
+
             <!-- Future Module -->
             <div class="dashboard-card">
                 <h2>Reports & Dashboard</h2>
