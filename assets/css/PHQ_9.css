@@ -1,0 +1,264 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 20px;
+
+    background: #f2f4f7;
+}
+
+.form-container {
+    width: 900px;
+    margin: 40px auto;
+    color: #000;
+    background: #fff;
+
+    /* Shadow effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    /* Optional polish */
+    padding: 54px;
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.header-center h1 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-center p {
+    margin: 2px 0 0;
+    font-size: 12px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img{
+    width: 100%;
+    height: 100%;
+}
+
+.patient-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.patient-info div {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap:5px;
+}
+
+.text-input {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 200px; /* default width */
+}
+
+.text-input.small {
+    width: 120px; /* smaller width for Age/Sex and Date */
+}
+
+.text-input:focus {
+    border-color: #007BFF; /* blue focus border */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.form-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.gad-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 🔑 forces fixed column widths */
+}
+
+.gad-table th,
+.gad-table td {
+    border: 1px solid #000;
+    padding: 6px;
+    font-size: 13px;
+}
+
+/* Question column */
+.gad-table .question-col,
+.gad-table tbody td:first-child {
+    width: 45%;
+    text-align: left;
+}
+
+/* Score columns (Not at all → Nearly every day) */
+.gad-table th:not(.question-col),
+.gad-table tbody td:not(:first-child) {
+    width: 13.75%; /* (100 - 45) / 4 */
+    text-align: center;
+}
+
+/* Center radio buttons perfectly */
+.gad-table input[type="radio"] {
+    transform: scale(1.1);
+}
+
+
+.question-col {
+    width: 45%;
+    text-align: left;
+}
+
+:root {
+    --row-height: 34px; /* 🔑 change once, affects everything */
+}
+
+/* SCORE SECTION */
+.score-section {
+    display: grid;
+    grid-template-columns: 
+        45% 
+        13.75% 
+        13.75% 
+        13.75% 
+        13.75%;
+    margin-top: 10px;
+}
+
+/* TOTAL SECTION */
+.total-section {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    margin-top: 10px;
+}
+
+/* SHARED BOX STYLES */
+.score-box,
+.score-input,
+.total-input {
+    height: var(--row-height);
+    border: 1px solid #000;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+/* INPUT-SPECIFIC */
+.score-input,
+.total-input {
+    background: #fff;
+}
+
+/* TOTAL INPUT ALIGNMENT */
+.total-input {
+    justify-content: flex-start;
+    padding: 0 8px;
+    text-align: center;
+}
+
+
+
+.difficulty-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.difficulty-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.difficulty-question {
+    width: 45%;
+    text-align: left;
+}
+
+.footer {
+    margin-top: 30px;
+    position: relative; /* make it the reference for absolute positioning */
+    font-family: Arial, sans-serif;
+}
+
+.footer div {
+    margin: 10px 0;
+}
+
+/* Style inputs nicely */
+.footer input.text-input {
+    padding: 6px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.footer input.text-input.small {
+    width: 120px;
+}
+
+/* Position PHU-F-33-00 at bottom right */
+.footer span.phu-form {
+    position: absolute;
+    right: 0;
+    bottom: -20px; /* adjust if you need more spacing from inputs */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center; /* center button */
+}
+
+#submitForm {
+    background-color: #004080; /* formal navy color */
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitForm:hover {
+    background-color: #00264d;
+}
+

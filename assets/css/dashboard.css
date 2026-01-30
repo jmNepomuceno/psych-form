@@ -1,0 +1,183 @@
+/* ===== Global Reset ===== */
+* {
+    box-sizing: border-box;
+}
+
+/* ===== Base Layout ===== */
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #eef2f6 0%, #f8fafc 100%);
+    margin: 0;
+    padding: 30px 20px;
+    color: #2c3e50;
+}
+
+/* ===== Dashboard Container ===== */
+.dashboard-container {
+    max-width: 1300px;
+    margin: auto;
+}
+
+/* ===== Page Title ===== */
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #1f2937;
+}
+
+/* ===== Card Wrapper ===== */
+.table-card {
+    background: #ffffff;
+    padding: 25px 30px;
+    margin-bottom: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Card Titles ===== */
+.table-card h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    border-left: 5px solid #2563eb;
+    padding-left: 12px;
+}
+
+/* ===== DataTable Tweaks ===== */
+table.dataTable {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+table.dataTable thead th {
+    background-color: #f1f5f9;
+    color: #374151;
+    font-weight: 600;
+    padding: 12px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+table.dataTable tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* ===== Action Button ===== */
+.btn-view {
+    padding: 7px 14px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-view:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* ===== DataTable Controls ===== */
+.dataTables_wrapper .dataTables_filter input {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    margin-left: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 6px 10px;
+    margin: 2px;
+    border-radius: 6px !important;
+    border: 1px solid #d1d5db;
+    background: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    border-color: #2563eb;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .table-card {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #fff;
+    width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
