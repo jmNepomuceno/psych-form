@@ -52,6 +52,19 @@
                 <a href="./public/FTND.php">Open Fagerström Test</a>
             </div>
 
+            <!-- Pittsburgh Sleep Quality Index (PSQI) -->
+            <div class="dashboard-card">
+                <h2>Pittsburgh Sleep Quality Index (PSQI)</h2>
+                <p>
+                    The Pittsburgh Sleep Quality Index (PSQI) is a standardized assessment
+                    tool used to measure sleep quality and disturbances over a one-month
+                    period. It helps identify individuals with poor sleep quality who may
+                    require further evaluation or intervention.
+                </p>
+                <a href="./public/sqa.php">Open PSQI Assessment</a>
+            </div>
+
+
 
             <!-- Future Module -->
             <div class="dashboard-card">

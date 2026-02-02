@@ -1,0 +1,661 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 20px;
+
+    background: #f2f4f7;
+}
+
+.form-container {
+    width: 900px;
+    margin: 40px auto;
+    color: #000;
+    background: #fff;
+
+    /* Shadow effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    /* Optional polish */
+    padding: 54px;
+    border-radius: 8px;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    gap: 10px;
+}
+
+
+.header-center {
+    text-align: center;
+    flex: 1;
+}
+
+.header-center h1 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-center p {
+    margin: 2px 0 0;
+    font-size: 12px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img{
+    width: 100%;
+    height: 100%;
+}
+
+.patient-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.patient-info div {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap:5px;
+}
+
+.text-input {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 200px; /* default width */
+}
+
+.text-input.small {
+    width: 120px; /* smaller width for Age/Sex and Date */
+}
+
+.text-input:focus {
+    border-color: #007BFF; /* blue focus border */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.form-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.ftnd-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 🔑 forces fixed column widths */
+}
+
+.ftnd-table th,
+.ftnd-table td {
+    border: 1px solid #000;
+    padding: 6px;
+    font-size: 13px;
+}
+
+/* Question column */
+.ftnd-table .question-col,
+.ftnd-table tbody td:first-child {
+    width: 45%;
+    text-align: left;
+}
+
+/* Score columns (Not at all → Nearly every day) */
+.ftnd-table th:not(.question-col),
+.ftnd-table tbody td:not(:first-child) {
+    width: 13.75%; /* (100 - 45) / 4 */
+    text-align: center;
+}
+
+/* Center radio buttons perfectly */
+.ftnd-table input[type="radio"] {
+    transform: scale(1.1);
+}
+
+
+.question-col {
+    width: 45%;
+    text-align: left;
+}
+
+:root {
+    --row-height: 34px; /* 🔑 change once, affects everything */
+}
+
+/* SCORE SECTION */
+.score-section {
+    display: grid;
+    grid-template-columns: 
+        45% 
+        13.75% 
+        13.75% 
+        13.75% 
+        13.75%;
+    margin-top: 10px;
+}
+
+/* TOTAL SECTION */
+.total-section {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    margin-top: 10px;
+}
+
+/* SHARED BOX STYLES */
+.score-box,
+.score-input,
+.total-input {
+    height: var(--row-height);
+    border: 1px solid #000;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+/* INPUT-SPECIFIC */
+.score-input,
+.total-input {
+    background: #fff;
+}
+
+/* TOTAL INPUT ALIGNMENT */
+.total-input {
+    justify-content: flex-start;
+    padding: 0 8px;
+    text-align: center;
+}
+
+
+
+.difficulty-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.difficulty-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.difficulty-question {
+    width: 45%;
+    text-align: left;
+}
+
+.footer {
+    margin-top: 30px;
+    position: relative; /* make it the reference for absolute positioning */
+    font-family: Arial, sans-serif;
+}
+
+.footer div {
+    margin: 10px 0;
+}
+
+/* Style inputs nicely */
+.footer input.text-input {
+    padding: 6px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.footer input.text-input.small {
+    width: 120px;
+}
+
+/* Position PHU-F-33-00 at bottom right */
+.footer span.phu-form {
+    position: absolute;
+    right: 0;
+    bottom: -20px; /* adjust if you need more spacing from inputs */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center; /* center button */
+}
+
+#submitForm {
+    background-color: #004080; /* formal navy color */
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitForm:hover {
+    background-color: #00264d;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #ffffff;
+    width: 460px;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    animation: fadeInScale 0.25s ease;
+}
+
+@keyframes fadeInScale {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 21px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.result-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.result-summary > div {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+}
+
+.result-summary .label {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.score-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+}
+
+
+.severity-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Severity colors */
+.severity-LowStress { background: #2ecc71; }
+.severity-Mild { background: #f1c40f; color: #000; }
+.severity-ModerateStress { background: #e67e22; }
+.severity-HighStress { background: #e74c3c; }
+
+.severity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.severity-table th {
+    background: #f5f7fa;
+    font-weight: 600;
+}
+
+.severity-table th,
+.severity-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.severity-table tr.active {
+    background: #eef6ff;
+    border-left: 4px solid #007bff;
+}
+
+.contact-section {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+}
+
+.contact-section label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.contact-section input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.contact-section input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+
+.alert-text {
+    color: #9a3412;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+
+.modal-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-primary {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.btn-primary:disabled {
+    background: #c7d2fe;
+    cursor: not-allowed;
+}
+
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.consent-box {
+    background: #f9fafc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #e67e22;
+}
+
+.disclaimer-text {
+    font-size: 13px;
+    color: #57534e;
+    line-height: 1.4;
+    margin-bottom: 14px;
+}
+
+
+.consent-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-consent {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-consent.yes {
+    background: #007bff;
+    color: #fff;
+}
+
+.btn-consent.no {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-consent.yes:hover {
+    background: #0056b3;
+}
+
+.btn-consent.no:hover {
+    background: #cfcfcf;
+}
+
+.consent-section {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+}
+
+.disclaimer-text {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.consent-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.consent-options label {
+    position: relative;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Hide default radio */
+.consent-options input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Hover */
+.consent-options label:hover {
+    border-color: #fb923c;
+    background: #ffedd5;
+}
+
+/* Selected */
+.consent-options input:checked + span,
+.consent-options label:has(input:checked) {
+    border-color: #f97316;
+    background: #fff7ed;
+    box-shadow: 0 0 0 2px rgba(249,115,22,0.2);
+}
+
+.btn-primary:disabled {
+    background: #b0c4de;
+    cursor: not-allowed;
+}
+
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+}
+
+.modal-box {
+    background: #ffffff;
+    width: 480px;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+    animation: modalEnter 0.25s ease;
+}
+
+@keyframes modalEnter {
+    from {
+        transform: translateY(10px) scale(0.97);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.severity-VeryLow { background: #22c55e; }
+.severity-Low { background: #84cc16; color: #000; }
+.severity-Moderate { background: #f59e0b; }
+.severity-High { background: #f97316; }
+.severity-VeryHigh { background: #dc2626; }
+
+
+.psc-table tbody tr td:nth-child(2) input[type="radio"],
+.psc-table tbody tr td:nth-child(3) input[type="radio"],
+.psc-table tbody tr td:nth-child(4) input[type="radio"],
+.psc-table tbody tr td:nth-child(5) input[type="radio"] 
+{
+   margin-right:5px;
+}
+
+/*  */
+
+/* ===============================
+   PSS QUESTION TABLE STYLING
+   =============================== */
+
+.psc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: #ffffff;
+}
+
+.psc-table thead th {
+    background-color: #f2f5f9;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.psc-table tbody td {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.psc-table tbody td:first-child {
+    text-align: left;
+    width: 55%;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.psc-table tbody td:not(:first-child) {
+    text-align: center;
+    width: 9%;
+}
+
+/* Zebra striping */
+.psc-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Radio buttons */
+.psc-table input[type="radio"] {
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
+/* Hover effect */
+.psc-table tbody tr:hover {
+    background-color: #eef5ff;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .psc-table {
+        font-size: 13px;
+    }
+
+    .psc-table tbody td:first-child {
+        width: auto;
+    }
+
+    .psc-table thead {
+        display: none;
+    }
+
+    .psc-table tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .psc-table tbody td {
+        display: inline-block;
+        border: none;
+        padding: 5px;
+    }
+
+    .psc-table tbody td:first-child {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+}

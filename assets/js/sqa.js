@@ -100,8 +100,9 @@ $(document).ready(function() {
             const val = parseInt($(this).val());
             if (!isNaN(val)) total += val;
         });
-
-        $('#totalScore').val(total);
+        
+        console.log(total)
+        $('.total-section input').val(total).trigger('change');
         return total;
     }
 

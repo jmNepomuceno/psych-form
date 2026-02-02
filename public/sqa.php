@@ -215,10 +215,10 @@
             <tbody>
                 <tr>
                     <td></td>
-                    <td><input type="radio" name="q9"></td>
-                    <td><input type="radio" name="q9"></td>
-                    <td><input type="radio" name="q9"></td>
-                    <td><input type="radio" name="q9"></td>
+                    <td><input type="radio" name="q9" value="0"></td>
+                    <td><input type="radio" name="q9" value="1"></td>
+                    <td><input type="radio" name="q9" value="2"></td>
+                    <td><input type="radio" name="q9" value="3"></td>
                 </tr>
             </tbody>
         </table>
