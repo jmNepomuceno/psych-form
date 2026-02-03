@@ -182,12 +182,19 @@
     <div id="viewModal" class="modal-overlay" style="display:none;">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modalTitle"></h3>
+                <div class="modal-title-wrapper">
+                    <h3 id="modalTitle">Modal Title Here</h3>
+                    <!-- <p class="modal-subtitle" id="modalSubtitle">Optional subtitle goes here</p> -->
+                </div>
                 <button class="modal-close">&times;</button>
             </div>
-            <div class="modal-body" id="modalContent"></div>
+
+            <div class="modal-body" id="modalContent">
+                <p>This is the modal content. You can add text, tables, forms, or other elements here.</p>
+            </div>
         </div>
     </div>
+
 
     <script src="../assets/js/dashboard.js"></script>
 </body>

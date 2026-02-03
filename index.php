@@ -13,12 +13,21 @@
 
     <div class="dashboard-container">
 
+        <!-- HEADER WITH LOGOS -->
         <div class="dashboard-header">
+            <div class="logo-row">
+                <img src="../source/tcp_BGHMC.jpg" alt="BGHMC Logo">
+                <img src="../source/tcp_DOH.jpg" alt="DOH Logo">
+                <img src="../source/tcp_BP.jpg" alt="Bagong Pilipinas Logo">
+                <img src="../source/tcp_BGHMC.jpg" alt="PHU Logo">
+            </div>
+
             <h1>Health & Wellness Clinic</h1>
             <h2>Public Health Unit</h2>
             <p>Mental Health Screening Forms</p>
         </div>
 
+        <!-- DASHBOARD CARDS SECTION -->
         <div class="card-grid">
 
             <!-- GAD-7 -->
@@ -100,8 +109,8 @@
                 <a href="./public/parq.php">Open PAR-Q+ Assessment</a>
             </div>
 
-            <!-- Future Module -->
-            <div class="dashboard-card">
+            <!-- Reports -->
+            <div class="dashboard-card card-secondary">
                 <h2>Reports & Dashboard</h2>
                 <p>
                     View statistics, trends, and summarized results
@@ -113,6 +122,7 @@
         </div>
 
     </div>
+
 
 </body>
 </html>
