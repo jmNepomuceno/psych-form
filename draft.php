@@ -9,7 +9,7 @@
     // $result = $soap->GetESignature($param)->GetESignatureResult;
     // echo "<pre>"; print_r($result); echo "</pre>";
 
-    $sql = "describe fagerstrom_test";
+    $sql = "describe pss_test";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

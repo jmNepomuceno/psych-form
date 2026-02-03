@@ -32,7 +32,7 @@
             </div>
 
             <!-- PHQ-9 -->
-            <div class="dashboard-card card-secondary">
+            <div class="dashboard-card">
                 <h2>PHQ-9 Assessment</h2>
                 <p>
                     Patient Health Questionnaire used to screen, diagnose,
@@ -64,7 +64,41 @@
                 <a href="./public/sqa.php">Open PSQI Assessment</a>
             </div>
 
+            <!-- Perceived Stress Scale (PSS-10) -->
+            <div class="dashboard-card">
+                <h2>Perceived Stress Scale (PSS-10)</h2>
+                <p>
+                    The Perceived Stress Scale (PSS-10) is a widely used psychological tool
+                    for measuring the perception of stress over the past month. It helps identify
+                    individuals experiencing high levels of stress who may benefit from stress
+                    management guidance or interventions.
+                </p>
+                <a href="./public/psc.php">Open PSS-10 Assessment</a>
+            </div>
 
+            <!-- AUDIT Alcohol Screening Tool -->
+            <div class="dashboard-card">
+                <h2>AUDIT Alcohol Screening Tool</h2>
+                <p>
+                    The Alcohol Use Disorders Identification Test (AUDIT) is a screening tool
+                    used to assess alcohol consumption, drinking behaviors, and alcohol-related
+                    problems over the past 12 months. It helps detect risky drinking and alcohol
+                    use disorders for appropriate intervention.
+                </p>
+                <a href="./public/aas.php">Open AUDIT Assessment</a>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>PAR-Q+ Physical Activity Readiness Questionnaire</h2>
+                <p>
+                    The Physical Activity Readiness Questionnaire for Everyone (PAR-Q+)
+                    is a screening tool used to determine whether it is safe for an
+                    individual to engage in physical activity. It helps identify
+                    medical conditions or symptoms that may require medical clearance
+                    before starting or increasing physical activity.
+                </p>
+                <a href="./public/parq.php">Open PAR-Q+ Assessment</a>
+            </div>
 
             <!-- Future Module -->
             <div class="dashboard-card">
