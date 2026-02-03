@@ -1,109 +1,299 @@
 $(document).ready(function () {
-        /* ==========================
-        GAD-7 DATATABLE
-        ========================== */
-        $('#gadTable').DataTable({
-            ajax: {
-                url: '../assets/php/fetch_gad7.php',
-                type: 'GET',
-                dataType: 'json',
-                dataSrc: ''
-            },
+
+    /* ==========================
+       FORM CONFIGURATION
+    ========================== */
+    const forms = {
+        phq9: {
+            key: 'phq9',
+            table: '#table-phq9',
+            panel: '#panel-phq9',
+            count: '#phqCount',
+            fetch: '../assets/php/fetch_phq9.php',
             columns: [
-                { data: null, render: (data, type, row, meta) => meta.row + 1 },
-                { data: 'patient_name' },
-                { data: 'contact_number', render: num => num ? num : 'N/A' },
-                { data: 'total_score' },
-                { data: 'severity', render: sev => sev ? sev : 'N/A' },
-                { data: 'created_at' },
-                { data: 'id', render: id => `<button class="btn-view" onclick="viewGAD7(${id})">View</button>` }
-            ],
-            order: [[5, 'desc']],
-            pageLength: 10,
-            responsive: true,
-            columnDefs: [
-                { className: "text-center", targets: [0, 3, 4, 6] }
-            ],
-            createdRow: function(row, data) {
-                if (data.severity) {
-                    let severity = data.severity.toLowerCase();
-                    if (severity === 'mild') $(row).css('background-color', '#d1fae5');      // light green
-                    else if (severity === 'moderate') $(row).css('background-color', '#ffedd5'); // light orange
-                    else if (severity === 'severe') $(row).css('background-color', '#fee2e2');   // light red
-                }
-            }
-        });
+                rowNumber(),
+                col('patient_name'),
+                contactCol(),
+                col('total_score'),
+                severityCol(),
+                col('created_at'),
+                viewBtn('phq9')
+            ]
+        },
 
-
-        /* ==========================
-        PHQ-9 DATATABLE
-        ========================== */
-        $('#phqTable').DataTable({
-            ajax: {
-                url: '../assets/php/fetch_phq9.php',
-                type: 'GET',
-                dataType: 'json',
-                dataSrc: ''
-            },
+        gad7: {
+            key: 'gad7',
+            table: '#table-gad7',
+            panel: '#panel-gad7',
+            count: '#gadCount',
+            fetch: '../assets/php/fetch_gad7.php',
             columns: [
-                { data: null, render: (data, type, row, meta) => meta.row + 1 },
-                { data: 'patient_name' },
-                { data: 'contact_number', render: num => num ? num : 'N/A' },
-                { data: 'total_score' },
-                { data: 'severity', render: sev => sev ? sev : 'N/A' },
-                { data: 'created_at' },
-                { data: 'id', render: id => `<button class="btn-view" onclick="viewPHQ9(${id})">View</button>` }
-            ],
-            order: [[5, 'desc']],
-            pageLength: 10,
-            responsive: true,
-            columnDefs: [
-                { className: "text-center", targets: [0, 3, 4, 6] }
-            ],
-            createdRow: function(row, data) {
-                if (data.severity) {
-                    let severity = data.severity.toLowerCase();
-                    if (severity === 'mild') $(row).css('background-color', '#d1fae5');
-                    else if (severity === 'moderate') $(row).css('background-color', '#ffedd5');
-                    else if (severity === 'severe') $(row).css('background-color', '#fee2e2');
-                }
-            }
-        });
+                rowNumber(),
+                col('patient_name'),
+                contactCol(),
+                col('total_score'),
+                severityCol(),
+                col('created_at'),
+                viewBtn('gad7')
+            ]
+        },
+
+        audit: {
+            key: 'audit',
+            table: '#table-audit',
+            panel: '#panel-audit',
+            count: '#auditCount',
+            fetch: '../assets/php/fetch_audit.php',
+            columns: [
+                rowNumber(),
+                col('patient_name'),
+                contactCol(),
+                col('total_score'),
+                severityCol(),
+                col('created_at'),
+                viewBtn('audit')
+            ]
+        },
+
+        parq: {
+            key: 'parq',
+            table: '#table-parq',
+            panel: '#panel-parq',
+            count: '#parqCount',
+            fetch: '../assets/php/fetch_parq.php',
+            columns: [
+                rowNumber(),
+
+                { title: 'Full Name', data: 'patient_name' },
+
+                { title: 'Age / Sex', data: 'age_sex' },
+
+                {
+                    title: 'Result',
+                    data: 'result',
+                    render: r => r || 'No risk identified'
+                },
+
+                {
+                    title: 'Clearance',
+                    data: 'result',
+                    render: r => {
+                        if (!r) {
+                            return '<span class="badge badge-green">CLEARED</span>';
+                        }
+
+                        return r.toLowerCase().includes('medical')
+                            ? '<span class="badge badge-red">NEEDS CLEARANCE</span>'
+                            : '<span class="badge badge-green">CLEARED</span>';
+                    }
+                },
+
+                { title: 'Date', data: 'created_at' },
+
+                viewBtn('parq')
+            ]
+        },
+
+        psqi: {
+            key: 'psqi',
+            table: '#table-psqi',
+            panel: '#panel-psqi',
+            count: '#psqiCount',
+            fetch: '../assets/php/fetch_psqi.php',
+            columns: [
+                rowNumber(),
+                col('patient_name'),
+                col('total_score'),
+                {
+                    data: 'sleep_quality',
+                    render: q => q || 'N/A'
+                },
+                col('created_at'),
+                viewBtn('psqi')
+            ]
+        },
+
+        fager: {
+            key: 'fager',
+            table: '#table-fager',
+            panel: '#panel-fager',
+            count: '#fagerCount',
+            fetch: '../assets/php/fetch_ftnd.php',
+            columns: [
+                rowNumber(),
+                col('patient_name'),
+                col('total_score'),
+                {
+                    data: 'sleep_quality',
+                    render: q => q || 'N/A'
+                },
+                col('created_at'),
+                viewBtn('fager')
+            ]
+        },
+
+        pss: {
+            key: 'pss',
+            table: '#table-pss',
+            panel: '#panel-pss',
+            count: '#pssCount',
+            fetch: '../assets/php/fetch_pss.php',
+            columns: [
+                rowNumber(),
+                col('patient_name'),
+                col('total_score'),
+                {
+                    data: 'sleep_quality',
+                    render: q => q || 'N/A'
+                },
+                col('created_at'),
+                viewBtn('pss')
+            ]
+        }
+        
+    };
 
 
+    const initialized = {};
 
+    /* ==========================
+       INIT FIRST TAB ONLY
+    ========================== */
+    initTable(forms.phq9);
 
-        $('.modal-close').on('click', function () {
-            $('#viewModal').fadeOut();
-        });
+    /* ==========================
+       TAB SWITCHING
+    ========================== */
+    $('.tab-btn').on('click', function () {
+        const target = $(this).data('target');
 
-        // Close when clicking outside the box
-        $('#viewModal').on('click', function (e) {
-            if (e.target === this) {
-                $(this).fadeOut();
-            }
-        });
+        $('.tab-btn').removeClass('active');
+        $(this).addClass('active');
 
+        $('.table-panel').removeClass('active').hide();
+        $(`#panel-${target}`).addClass('active').fadeIn();
+
+        if (!initialized[target]) {
+            initTable(forms[target]);
+        } else {
+            $(forms[target].table).DataTable().columns.adjust();
+        }
     });
 
     /* ==========================
-    VIEW FUNCTIONS
+       MODAL EVENTS
     ========================== */
+    $('.modal-close').on('click', closeModal);
 
-    function viewPHQ9(id) {
-        $('#modalTitle').text('PHQ-9 Assessment');
-        $('#modalContent').html('<iframe src="../public/PHQ_9.php?id=' + id + '" style="width:100%;height:80vh;border:none;"></iframe>');
-        $('#viewModal').fadeIn();
+    $('#viewModal').on('click', function (e) {
+        if (e.target === this) closeModal();
+    });
+
+    /* ==========================
+       DATATABLE INITIALIZER
+    ========================== */
+    function initTable(cfg) {
+        const table = $(cfg.table).DataTable({
+            ajax: {
+                url: cfg.fetch,
+                type: 'GET',
+                dataType: 'json',
+                dataSrc: function (data) {
+                    $(cfg.count).text(data.length);
+                    return data;
+                }
+            },
+            columns: cfg.columns,
+            order: [[cfg.columns.length - 2, 'desc']],
+            pageLength: 10,
+            responsive: true,
+            columnDefs: [
+                { className: 'text-center', targets: '_all' }
+            ],
+            createdRow: function (row, data) {
+                if (data.severity) {
+                    const sev = data.severity.toLowerCase();
+                    if (sev === 'mild') $(row).css('background', '#d1fae5');
+                    else if (sev === 'moderate') $(row).css('background', '#ffedd5');
+                    else if (sev === 'severe') $(row).css('background', '#fee2e2');
+                }
+            }
+        });
+
+        initialized[cfg.key] = true;
     }
+});
 
-    function viewGAD7(id) {
-        $('#modalTitle').text('GAD-7 Assessment');
-        $('#modalContent').html(
-            '<iframe src="../public/GAD_7.php?id=' + id + '" style="width:100%;height:80vh;border:none;"></iframe>'
-        );
-        $('#viewModal').fadeIn();
-    }
+/* ==========================
+   COLUMN HELPERS
+========================== */
+function rowNumber() {
+    return {
+        data: null,
+        render: (d, t, r, m) => m.row + 1
+    };
+}
 
+function col(name) {
+    return {
+        data: name,
+        render: v => v || 'N/A'
+    };
+}
 
+function contactCol() {
+    return {
+        data: 'contact_number',
+        render: v => v || 'N/A'
+    };
+}
 
-    
+function severityCol() {
+    return {
+        data: 'severity',
+        render: v => v || 'N/A'
+    };
+}
+
+function viewBtn(type) {
+    return {
+        data: 'id',
+        render: id =>
+            `<button class="btn-view" onclick="viewForm('${type}', ${id})">View</button>`
+    };
+}
+
+/* ==========================
+   VIEW MODAL
+========================== */
+function viewForm(type, id) {
+    const titles = {
+        phq9: 'PHQ-9 Assessment',
+        gad7: 'GAD-7 Assessment',
+        audit: 'AUDIT Assessment',
+        parq: 'PAR-Q+ Assessment',
+        psqi: 'PSQI Assessment',
+        fager : "Fagerstrom Test Assessment",
+        pss : "Perceived Stress Scale"
+    };
+
+    const urls = {
+        phq9: '../public/PHQ_9.php',
+        gad7: '../public/GAD_7.php',
+        audit: '../public/AUDIT.php',
+        parq: '../public/PARQ.php',
+        psqi: '../public/PSQI.php',
+        fager : '../public/FTND.php',
+        pss : '../public/psc.php'
+    };
+
+    $('#modalTitle').text(titles[type]);
+    $('#modalContent').html(
+        `<iframe src="${urls[type]}?id=${id}" style="width:100%;height:80vh;border:none;"></iframe>`
+    );
+    $('#viewModal').fadeIn();
+}
+
+function closeModal() {
+    $('#viewModal').fadeOut();
+}
