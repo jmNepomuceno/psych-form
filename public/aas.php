@@ -21,7 +21,7 @@
 
             <!-- Center Text -->
             <div class="header-center">
-                <h1 class="hospital-title">BATAAN GENERAL HOSPITAL AND MEDICAL CENTER</h1>
+                <h1 class="hospital-title">asdfBATAAN GENERAL HOSPITAL AND MEDICAL CENTER</h1>
                 <p class="hospital-subtitle">Balanga City, Bataan<br>ISO-QMS 9001:2015 Certified</p>
             </div>
 

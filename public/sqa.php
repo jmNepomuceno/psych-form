@@ -176,7 +176,7 @@
                 <tr>
                     <td class="question-col">7. During the past month, how often have you taken medicine to help you sleep?</td>
                     <td colspan="4">
-                        <select class="text-input">
+                        <select class="text-input" name="q7">
                             <option value="0">Not during the past month</option>
                             <option value="1">Less than once a week</option>
                             <option value="2">Once or twice a week</option>
@@ -188,7 +188,7 @@
                 <tr>
                     <td>8. During the past month, how often have you had trouble staying awake?</td>
                     <td colspan="4">
-                        <select class="text-input">
+                        <select class="text-input" name="q8">
                             <option value="0">Not during the past month</option>
                             <option value="1">Less than once a week</option>
                             <option value="2">Once or twice a week</option>

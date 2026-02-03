@@ -280,9 +280,9 @@ function viewForm(type, id) {
     const urls = {
         phq9: '../public/PHQ_9.php',
         gad7: '../public/GAD_7.php',
-        audit: '../public/AUDIT.php',
+        audit: '../public/aas.php',
         parq: '../public/PARQ.php',
-        psqi: '../public/PSQI.php',
+        psqi: '../public/sqa.php',
         fager : '../public/FTND.php',
         pss : '../public/psc.php'
     };

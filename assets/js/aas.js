@@ -49,6 +49,79 @@ function getAUDITSeverity(score) {
 }
 
 $(document).ready(function() {
+
+    // Parse id parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (id) {
+        // fetch data and populate
+        $.get('../assets/php/get_aas.php', { id: id }, function (data) {
+            console.log("data:" , data)
+            if (!data) return;
+
+            // ===== PATIENT INFO =====
+            $('input[name="patient_name"]').val(data.patient_name);
+            $('input[name="age_sex"]').val(data.age_sex);
+            $('input[name="exam_date"]').val(data.exam_date);
+
+            // ===== QUESTIONS =====
+            for (let i = 1; i <= 9; i++) {
+                $(`input[name="q${i}"][value="${data['q' + i]}"]`).prop('checked', true);
+            }
+
+            // ===== FUNCTIONAL DIFFICULTY =====
+            $(`input[name="difficulty"][value="${data.difficulty}"]`).prop('checked', true);
+
+            // ===== SIGNATURE =====
+            $('input[name="physician"]').val(data.physician);
+            $('input[name="license_no"]').val(data.license_no);
+            $('input[name="physician_date"]').val(data.physician_date);
+
+            // ===== SCORE =====
+            $('#totalScore').val(data.total_score);
+
+            // ===== READ-ONLY =====
+            $('input').prop('disabled', true);
+            $('#submitForm').hide();
+        }, 'json');
+    }
+
+    $('input[type="radio"]').on('change', function () {
+
+        let totalScore = 0;
+
+        // Column score totals (actual score, not count)
+        let columnTotals = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0
+        };
+
+        // Loop through all 9 questions
+        for (let i = 1; i <= 10; i++) {
+            let selected = $('input[name="q' + i + '"]:checked');
+
+            if (selected.length) {
+                let val = parseInt(selected.val());
+
+                totalScore += val;
+                columnTotals[val] += val; // keeps track of column totals
+            }
+        }
+
+        // Update TOTAL SCORE
+        $('#totalScore').val(totalScore);
+
+        // Update COLUMN score section
+        $('.score-input').each(function () {
+            let score = $(this).data('score');
+            $(this).text(columnTotals[score] || 0);
+        });
+
+    });
+
+
     // Update total dynamically on radio click
     $('input[type=radio]').on('click', function() {
         const total = calculateAUDITScore();

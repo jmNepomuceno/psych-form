@@ -124,6 +124,74 @@ function getPARQResult() {
 
 $(document).ready(function () {
 
+    // Parse id parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id) {
+        $.get('../assets/php/get_parq.php', { id: id }, function (data) {
+            console.log("data:", data);
+            if (!data) return;
+
+            // ===== PATIENT INFO =====
+            $('input[name="patient_name"]').val(data.patient_name);
+            $('input[name="age_sex"]').val(data.age_sex);
+            $('input[name="exam_date"]').val(data.exam_date);
+
+            // ===== ALL YES/NO RADIOS (q1, q1a, q1b, q2_, etc.) =====
+            Object.keys(data).forEach(key => {
+                if (key.startsWith('q')) {
+                    $(`input[name="${key}"][value="${data[key]}"]`)
+                        .prop('checked', true);
+                }
+            });
+
+            // ✅ ADD THIS BLOCK ONLY
+            // ===== TEXT INPUT QUESTIONS =====
+            $('input[type="text"]').each(function () {
+                const name = $(this).attr('name');
+                if (data[name] !== undefined) {
+                    $(this).val(data[name]);
+                }
+            });
+
+            // ===== SIGNATURE =====
+            $('input[name="physician"]').val(data.physician);
+            $('input[name="license_no"]').val(data.license_no);
+            $('input[name="physician_date"]').val(data.physician_date);
+
+            // ===== RESULT =====
+            $('#result').val(data.result);
+
+            // ===== READ-ONLY VIEW MODE =====
+            $('input, textarea').prop('disabled', true);
+            $('#submitForm').hide();
+        }, 'json');
+    }
+
+
+    /* ===============================
+    PAR-Q RESULT LOGIC (YES / NO)
+    ================================ */
+    $('input[type="radio"]').on('change', function () {
+
+        let hasYes = false;
+
+        // check ALL q* radios
+        $('input[type="radio"]:checked').each(function () {
+            if ($(this).val() === 'yes') {
+                hasYes = true;
+            }
+        });
+
+        if (hasYes) {
+            $('#result').val('Medical Clearance Required');
+        } else {
+            $('#result').val('Cleared for Physical Activity');
+        }
+    });
+
+
     // ===========================
     // SUBMIT FORM
     // ===========================

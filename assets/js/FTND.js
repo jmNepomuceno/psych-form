@@ -33,6 +33,82 @@ function getFTNDSeverity(score) {
 
 
 $(document).ready(function() {
+
+
+    // Parse id parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id) {
+        $.get('../assets/php/get_ftnd.php', { id: id }, function (data) {
+            console.log("data:", data);
+            if (!data) return;
+
+            // ===== PATIENT INFO =====
+            $('input[name="patient_name"]').val(data.patient_name);
+            $('input[name="age_sex"]').val(data.age_sex);
+            $('input[name="exam_date"]').val(data.exam_date);
+
+            // ===== GENERIC POPULATOR =====
+            Object.keys(data).forEach(key => {
+
+                // text / number inputs
+                const input = $(`input[name="${key}"]`);
+                if (input.length && input.attr('type') !== 'radio') {
+                    input.val(data[key]);
+                }
+
+                // radios
+                $(`input[type="radio"][name="${key}"][value="${data[key]}"]`)
+                    .prop('checked', true);
+            });
+
+            // ===== TOTAL SCORE =====
+            $('#totalScore').val(data.total_score); // adjust selector if needed
+
+            // ===== READ-ONLY VIEW MODE =====
+            $('input').prop('disabled', true);
+            $('#submitForm').hide();
+
+        }, 'json');
+    }
+
+
+    $('input[type="radio"]').on('change', function () {
+
+        let totalScore = 0;
+
+        // Column score totals (actual score, not count)
+        let columnTotals = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0
+        };
+
+        // Loop through all 9 questions
+        for (let i = 1; i <= 10; i++) {
+            let selected = $('input[name="q' + i + '"]:checked');
+
+            if (selected.length) {
+                let val = parseInt(selected.val());
+
+                totalScore += val;
+                columnTotals[val] += val; // keeps track of column totals
+            }
+        }
+
+        // Update TOTAL SCORE
+        $('#totalScore').val(totalScore);
+
+        // Update COLUMN score section
+        $('.score-input').each(function () {
+            let score = $(this).data('score');
+            $(this).text(columnTotals[score] || 0);
+        });
+
+    });
+
     // 1️⃣ Update total score dynamically on radio click
     $('input[type=radio]').on('click', function() {
         let total = 0;

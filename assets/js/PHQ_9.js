@@ -34,7 +34,6 @@ $(document).ready(function () {
     // Parse id parameter from URL
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    console.log(id)
 
     if (id) {
         // fetch data and populate

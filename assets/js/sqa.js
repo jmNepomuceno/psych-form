@@ -83,6 +83,87 @@ function getPSQISeverity(score) {
 
 $(document).ready(function() {
 
+    // Parse id parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id) {
+        $.get('../assets/php/get_sqa.php', { id: id }, function (data) {
+            console.log("data:", data);
+            if (!data) return;
+
+            // ===== PATIENT INFO =====
+            $('input[name="patient_name"]').val(data.patient_name);
+            $('input[name="age_sex"]').val(data.age_sex);
+            $('input[name="exam_date"]').val(data.exam_date);
+
+            // ===== GENERIC POPULATOR (TEXT, TIME, NUMBER, SELECT) =====
+            Object.keys(data).forEach(key => {
+
+                // text / number / time inputs
+                const input = $(`input[name="${key}"]`);
+                if (input.length && input.attr('type') !== 'radio') {
+                    input.val(data[key]);
+                }
+
+                // select dropdowns
+                const select = $(`select[name="${key}"]`);
+                if (select.length) {
+                    select.val(data[key]);
+                }
+
+                // radios
+                $(`input[type="radio"][name="${key}"][value="${data[key]}"]`)
+                    .prop('checked', true);
+            });
+
+            // ===== TOTAL SCORE =====
+            $('.total-input').val(data.total_score);
+
+            // ===== READ-ONLY VIEW MODE =====
+            $('input, select').prop('disabled', true);
+            $('#submitForm').hide();
+
+        }, 'json');
+    }
+
+
+    $('input[type="radio"]').on('change', function () {
+
+        let totalScore = 0;
+
+        // Column score totals (actual score, not count)
+        let columnTotals = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0
+        };
+
+        // Loop through all 9 questions
+        for (let i = 1; i <= 10; i++) {
+            let selected = $('input[name="q' + i + '"]:checked');
+
+            if (selected.length) {
+                let val = parseInt(selected.val());
+
+                totalScore += val;
+                columnTotals[val] += val; // keeps track of column totals
+            }
+        }
+
+        // Update TOTAL SCORE
+        $('#totalScore').val(totalScore);
+
+        // Update COLUMN score section
+        $('.score-input').each(function () {
+            let score = $(this).data('score');
+            $(this).text(columnTotals[score] || 0);
+        });
+
+    });
+
+
     // ===============================
     // 1️⃣ Update total score dynamically
     // ===============================
@@ -210,26 +291,26 @@ $(document).ready(function() {
         // ===============================
         // AJAX Submission
         // ===============================
-        $.ajax({
-            url: '../assets/php/save_sqa.php', // PHP handler for PSQI
-            method: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function(response) {
-                console.log('Server response:', response);
+        // $.ajax({
+        //     url: '../assets/php/save_sqa.php', // PHP handler for PSQI
+        //     method: 'POST',
+        //     data: formData,
+        //     dataType: 'json',
+        //     success: function(response) {
+        //         console.log('Server response:', response);
 
-                // Reset form after submission
-                $('input').val('').prop('checked', false);
-                $('select').val('');
-                $('#totalScore').val('');
-                $('.severity-table tbody tr').removeClass('active');
-                $('#psqiResultModal').fadeOut();
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('Failed to submit form.');
-            }
-        });
+        //         // Reset form after submission
+        //         $('input').val('').prop('checked', false);
+        //         $('select').val('');
+        //         $('#totalScore').val('');
+        //         $('.severity-table tbody tr').removeClass('active');
+        //         $('#psqiResultModal').fadeOut();
+        //     },
+        //     error: function(xhr, status, error) {
+        //         console.error('Error:', error);
+        //         alert('Failed to submit form.');
+        //     }
+        // });
     });
 
 });
