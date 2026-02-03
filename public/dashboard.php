@@ -58,7 +58,6 @@
             <button class="tab-btn" data-target="psqi">PSQI</button>
             <button class="tab-btn" data-target="fager">Fagerstgrom Test</button>
             <button class="tab-btn" data-target="pss">PSS Test</button>
-
         </div>
 
         <!-- =========================
@@ -81,27 +80,99 @@
         </div>
 
         <div class="table-panel" id="panel-gad7">
-            <table id="table-gad7" class="display" style="width:100%"></table>
+            <table id="table-gad7" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="table-panel" id="panel-audit">
-            <table id="table-audit" class="display" style="width:100%"></table>
+            <table id="table-audit" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="table-panel" id="panel-parq">
-            <table id="table-parq" class="display" style="width:100%"></table>
+            <table id="table-parq" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="table-panel" id="panel-psqi">
-            <table id="table-psqi" class="display" style="width:100%"></table>
+            <table id="table-psqi" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="table-panel" id="panel-fager">
-            <table id="table-fager" class="display" style="width:100%"></table>
+            <table id="table-fager" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="table-panel" id="panel-pss">
-            <table id="table-pss" class="display" style="width:100%"></table>
+            <table id="table-pss" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Score</th>
+                        <th>Severity</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 

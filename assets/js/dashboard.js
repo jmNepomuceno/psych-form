@@ -103,11 +103,9 @@ $(document).ready(function () {
             columns: [
                 rowNumber(),
                 col('patient_name'),
+                contactCol(),
                 col('total_score'),
-                {
-                    data: 'sleep_quality',
-                    render: q => q || 'N/A'
-                },
+                severityCol(),
                 col('created_at'),
                 viewBtn('psqi')
             ]
@@ -122,11 +120,9 @@ $(document).ready(function () {
             columns: [
                 rowNumber(),
                 col('patient_name'),
+                contactCol(),
                 col('total_score'),
-                {
-                    data: 'sleep_quality',
-                    render: q => q || 'N/A'
-                },
+                severityCol(),
                 col('created_at'),
                 viewBtn('fager')
             ]
@@ -141,11 +137,9 @@ $(document).ready(function () {
             columns: [
                 rowNumber(),
                 col('patient_name'),
+                contactCol(),
                 col('total_score'),
-                {
-                    data: 'sleep_quality',
-                    render: q => q || 'N/A'
-                },
+                severityCol(),
                 col('created_at'),
                 viewBtn('pss')
             ]
@@ -153,12 +147,27 @@ $(document).ready(function () {
         
     };
 
-
+    function loadAllCounts() {
+        Object.values(forms).forEach(cfg => {
+            $.ajax({
+                url: cfg.fetch,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $(cfg.count).text(data.length);
+                },
+                error: function () {
+                    $(cfg.count).text('0');
+                }
+            });
+        });
+    }
     const initialized = {};
 
     /* ==========================
        INIT FIRST TAB ONLY
     ========================== */
+    loadAllCounts();
     initTable(forms.phq9);
 
     /* ==========================
@@ -175,7 +184,8 @@ $(document).ready(function () {
 
         if (!initialized[target]) {
             initTable(forms[target]);
-        } else {
+        } 
+        else {
             $(forms[target].table).DataTable().columns.adjust();
         }
     });
@@ -199,6 +209,7 @@ $(document).ready(function () {
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: function (data) {
+                    console.log(`Data returned for ${cfg.key}:`, data); // debug log
                     $(cfg.count).text(data.length);
                     return data;
                 }
@@ -211,17 +222,27 @@ $(document).ready(function () {
                 { className: 'text-center', targets: '_all' }
             ],
             createdRow: function (row, data) {
-                if (data.severity) {
-                    const sev = data.severity.toLowerCase();
-                    if (sev === 'mild') $(row).css('background', '#d1fae5');
-                    else if (sev === 'moderate') $(row).css('background', '#ffedd5');
-                    else if (sev === 'severe') $(row).css('background', '#fee2e2');
+                if (!data || !data.severity) return; // skip if no severity
+
+                const sev = data.severity.toLowerCase();
+
+                // map any keyword to a color
+                if (sev.includes('mild')) {
+                    $(row).css('background', '#d1fae5');
+                } else if (sev.includes('moderate')) {
+                    $(row).css('background', '#ffedd5');
+                } else if (sev.includes('severe') || sev.includes('very poor') || sev.includes('high')) {
+                    $(row).css('background', '#fee2e2');
+                } else {
+                    // optional: default color if severity doesn't match
+                    $(row).css('background', '');
                 }
             }
         });
 
         initialized[cfg.key] = true;
     }
+
 });
 
 /* ==========================
@@ -297,3 +318,6 @@ function viewForm(type, id) {
 function closeModal() {
     $('#viewModal').fadeOut();
 }
+
+
+
