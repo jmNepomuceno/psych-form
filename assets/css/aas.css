@@ -2,7 +2,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: #fff;
     margin: 0;
-    padding: 20px;
 
     background: #f2f4f7;
 }
@@ -20,7 +19,6 @@ body {
     padding: 54px;
     border-radius: 8px;
 }
-
 
 .header {
     display: flex;

@@ -1,126 +1,473 @@
+/* Global Styles */
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f8;
     margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-.dashboard-container {
-    max-width: 1300px;
-    margin: 60px auto;
-    padding: 20px;
-}
-
-.dashboard-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.logo-row {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0e3f8 0%, #f4f6fc 100%);
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.logo-row img {
-    height: 60px;
-    object-fit: contain;
-}
-
-/* Header text */
-.dashboard-header h1 {
-    margin-bottom: 10px;
-    font-size: 36px;
-    color: #0d6efd;
-}
-
-.dashboard-header h2 {
-    margin: 0;
-    font-size: 24px;
-    color: #555;
-}
-
-.dashboard-header p {
-    color: #666;
-    margin-top: 5px;
-    font-size: 16px;
-}
-
-/* Card grid */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-/* Dashboard cards */
-.dashboard-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+.container {
     display: flex;
+    width: 1000px !important;
+    height: 550px !important;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+/* Left illustration */
+.illustration {
+    flex: 1;
+    background: linear-gradient(135deg, #9fa6f7, #7179e0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #fff;
+    padding: 30px 20px;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
-.dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
-
-.dashboard-card h2 {
-    margin-top: 0;
-    font-size: 20px;
-    color: #0d6efd;
-}
-
-.dashboard-card p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 25px;
+.illustration h2 {
+    max-width: 260px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: 18px;
     line-height: 1.5;
 }
 
-.dashboard-card a {
-    align-self: flex-start;
-    text-decoration: none;
-    background: #0d6efd;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.dashboard-card a:hover {
-    background: #0b5ed7;
-    transform: scale(1.05);
-}
-
-.card-secondary a {
-    background: #198754;
-}
-
-.card-secondary a:hover {
-    background: #157347;
-}
-
-.card-muted {
-    opacity: 0.6;
-}
-
-
-/* .dashboard-section {
-    width: 300px;
-    margin-top: 50px;
-}
-
-.dashboard-section h2 {
-    text-align: center;
+/* 3D circle + stethoscope */
+.circle {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #c1c7f9, #5e65d3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
     margin-bottom: 20px;
-    color: #0d6efd;
-} */
+}
+
+.stethoscope {
+    width: 12px;
+    height: 70px;
+    background: #2c2f72;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.stethoscope::before {
+    content: '';
+    width: 12px;
+    height: 50px;
+    background: #2c2f72;
+    border-radius: 6px;
+    position: absolute;
+    bottom: -40px;
+    left: -6px;
+    transform: rotate(90deg);
+}
+
+.stethoscope::after {
+    content: '';
+    width: 25px;
+    height: 25px;
+    border: 5px solid #2c2f72;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -50px;
+    left: -7px;
+}
+
+/* Right form panel */
+.form-container {
+    flex: 1;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    background: #fff;
+    overflow-y: auto;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* GOVERNMENT LOGOS */
+.gov-logos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gov-logos img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.gov-logos img:hover {
+    transform: scale(1.1);
+}
+
+.form-container h1 {
+    font-size: 26px;
+    margin: 10px auto;
+    font-weight: 600;
+}
+
+.description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.symbol-divider {
+    text-align: center;
+}
+
+.symbol-divider span {
+    display: inline-block;
+    width: 50px;
+    height: 2px;
+    background: #7179e0;
+}
+
+/* Form inputs */
+.form-container input {
+    padding: 14px 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+.form-container input:focus {
+    border-color: #7179e0;
+    box-shadow: 0 0 5px rgba(113,121,224,0.4);
+    outline: none;
+}
+
+/* Button */
+.form-container button {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #7179e0;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(113,121,224,0.3);
+}
+
+.form-container button:hover {
+    background-color: #5a63c9;
+}
+
+/* Login link */
+.login-link {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+}
+
+.login-link a {
+    color: #7179e0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Context icons */
+.context-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    font-size: 22px;
+    justify-content: center;
+}
+
+/* Footer notes */
+.system-strip, .footer-note {
+    text-align: center;
+}
+
+.system-strip {
+    font-size: 11px;
+    color: #888;
+    margin-top: 15px;
+}
+
+.footer-note {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* Scrollbar for overflow */
+.form-container::-webkit-scrollbar {
+    width: 6px;
+}
+.form-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 3px;
+}
+
+/* Responsive */
+/* Geometric / faceted circle */
+/* 3D platform circle container */
+.platform-circle {
+    position: relative;
+    width: 160px;
+    height: 120px; /* taller for 3D depth */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Cylinder effect / side shadow */
+.platform-circle::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 30px; /* thickness of platform */
+    bottom: -30px; /* below the top circle */
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #5e65d3, #7179e0);
+    z-index: 0;
+}
+
+/* Center brain icon */
+.center-icon {
+    width: 60px;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    position: relative;
+}
+
+
+.platform-circle img{
+    width: 130px;
+}
+
+/* Left illustration - blue theme aligned with stethoscope icon */
+.illustration {
+    flex: 1;
+    background: linear-gradient(135deg, #6e8efb, #4a63e0); /* blue gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    padding: 30px 20px;
+    position: relative;
+}
+
+.illustration h1 {
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.5;
+    color: #e0e4ff; /* softer blue for text */
+    font-weight: bold;
+}
+
+.illustration p {
+    max-width: 420px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #e0e4ff; /* softer blue for text */
+}
+
+/* Platform circle - blue gradient / cylinder effect */
+.platform-circle {
+    position: relative;
+    width: 160px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background: radial-gradient(circle at 30% 30%, #8fa6ff, #4a63e0); /* matching blue */
+    border-radius: 50%;
+    box-shadow: 0 15px 25px rgba(74, 99, 224, 0.4); /* blueish shadow */
+}
+
+/* Cylinder effect / side shadow */
+.platform-circle::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 30px; /* thickness of platform */
+    bottom: -30px; /* below the top circle */
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #4a63e0, #6e8efb); /* darker to lighter blue */
+    z-index: 0;
+}
+
+/* Center stethoscope icon */
+.center-icon {
+    width: 60px;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    position: relative;
+}
+
+/* Optional: subtle highlight glow for the circle */
+.platform-circle::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    top: -10px;
+    left: -10px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+/* Accent bar aligned with blue theme */
+.accent-bar {
+    height: 6px !important;
+    width: 100%;
+    background: #4a63e0;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+/* Button hover aligned */
+.form-container button {
+    background-color: #4a63e0;
+    box-shadow: 0 5px 15px rgba(74, 99, 224, 0.3);
+}
+
+.form-container button:hover {
+    background-color: #3a4fbf;
+}
+
+
+.illustration h2 {
+    max-width: 260px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600; /* slightly bolder */
+    font-size: 20px; 
+    line-height: 1.4;
+    background: linear-gradient(90deg, #a3b8ff, #d6e0ff); /* blue gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 2px 4px rgba(0, 0, 50, 0.3); /* subtle depth */
+    letter-spacing: 0.5px;
+}
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    inset: 0; /* replaces top/left/width/height */
+    z-index: 9999;
+    background: rgba(0,0,0,0.4);
+
+    /* FLEX CENTERING */
+    justify-content: center;
+    align-items: center;
+}
+
+/* show modal */
+.custom-modal.show {
+    display: flex;
+}
+
+
+/* Modal content box */
+.custom-modal-content {
+    background: #f0f4ff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    text-align: center;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,100,0.2);
+    position: relative;
+    animation: modalFade 0.3s ease;
+}
+
+/* Close button (X) */
+.custom-modal-content .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #4a63e0;
+    font-weight: bold;
+}
+
+/* Modal icon */
+.custom-modal-content .modal-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.custom-modal-content .modal-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #4a63e0;
+    font-weight: 600;
+}
+
+/* Message */
+.custom-modal-content .modal-message {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* OK button */
+.custom-modal-content .modal-ok-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4a63e0;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.custom-modal-content .modal-ok-btn:hover {
+    background-color: #3a4fbf;
+}
+
+/* Fade-in animation */
+@keyframes modalFade {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

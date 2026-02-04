@@ -11,7 +11,29 @@
 <body>
 
     <div class="dashboard-container">
-        <h1>PHU Health Assessment Dashboard</h1>
+        <!-- <div class="logo-row">
+            <img src="../source/tcp_BGHMC_2.png" alt="BGHMC Logo">
+            <img src="../source/tcp_DOH_2.png" alt="DOH Logo">
+            <img src="../source/tcp_BP_2.png" alt="Bagong Pilipinas Logo">
+            <img src="../source/phu_bg.jpg" alt="PHU Logo">
+        </div> -->
+
+        
+
+         <!-- HEADER WITH LOGOS -->
+        <div class="dashboard-header">
+            <div class="logo-row">
+                <img src="../source/tcp_DOH_2.png" alt="DOH Logo">
+                <img src="../source/tcp_BGHMC_2.png" alt="BGHMC Logo">
+            </div>
+
+            <h1>PHU Health Assessment Dashboard</h1>
+
+            <div class="logo-row">
+                <img src="../source/phu_bg.jpg" alt="PHU Logo">
+                <img src="../source/tcp_BP_2.png" alt="Bagong Pilipinas Logo">
+            </div>
+        </div>
 
         <!-- =========================
             SUMMARY CARDS

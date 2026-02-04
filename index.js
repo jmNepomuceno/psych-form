@@ -1,38 +1,55 @@
-$(document).ready(function () {
+$(document).ready(function(){
+    // Function to handle login
+    // let modal_notif = new bootstrap.Modal(document.getElementById('modal-notif'));
+    // modal_notif.hide();
+    
+    function handleLogin() {
+        const username_input = $('#username').val();
+        const password_input = $('#password').val();
 
-    $('input[type="radio"]').on('change', function () {
+        console.log(username_input, password_input);
 
-        let totalScore = 0;
+        // Modal references
+        const loginModal = $('#login-modal');
+        const modalMessage = $('#login-modal .modal-message');
 
-        // Column score totals (actual score, not count)
-        let columnTotals = {
-            0: 0,
-            1: 0,
-            2: 0,
-            3: 0
-        };
-
-        // Loop through all 7 questions
-        for (let i = 1; i <= 7; i++) {
-            let selected = $('input[name="q' + i + '"]:checked');
-
-            if (selected.length) {
-                let val = parseInt(selected.val());
-
-                totalScore += val;
-                columnTotals[val] += val; // 🔥 key fix
-            }
-        }
-
-        // Update TOTAL SCORE
-        $('#totalScore').val(totalScore);
-
-        // Update COLUMN score section
-        $('.score-input').each(function () {
-            let score = $(this).data('score');
-            $(this).text(columnTotals[score] || 0);
+        // Close buttons
+        $('#login-modal .close-btn, #login-modal .modal-ok-btn').click(function() {
+            loginModal.removeClass('show');
         });
 
+        // AJAX login
+        $.ajax({
+            url: './assets/php/login.php',
+            method: "POST",
+            data: {
+                username: username_input,
+                password: password_input
+            },
+            success: function(response) {
+                if (response === "invalid") {
+                    $('#login-modal .modal-title').text("Invalid Credentials");
+                    modalMessage.text("The username or password you entered is incorrect.");
+                    loginModal.addClass('show'); // ✅ THIS is the key
+                } else {
+                    window.location.href = response;
+                }
+            }
+        });
+
+    }
+
+    // Trigger login on button click
+    $('#login-btn').click(function(e) {
+        e.preventDefault(); // Prevent form submission  
+        handleLogin();
     });
 
-});
+    // Trigger login on Enter key press
+    $('#username-txt, #password-txt').keydown(function(event) {
+        if (event.key === "Enter" || event.keyCode === 13) {
+            handleLogin();
+        }
+    });
+
+})

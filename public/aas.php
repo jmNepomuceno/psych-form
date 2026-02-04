@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GAD-7 Form</title>
+    <title>Audit Alcohol Screening Tool</title>
     <link rel="stylesheet" href="../assets/css/aas.css">
-    <!-- <link rel="stylesheet" href="../assets/css/sidebar.css"> -->
+    <link rel="stylesheet" href="../assets/css/header.css">
     <?php require "../links/header_link.php"; ?>
 
 </head>
 <body>
-    <div class="form-container">
+    <?php include 'header.php'; ?>
 
+    <div class="form-container">
         <!-- HEADER -->
         <div class="header">
             <!-- Left Logos -->
@@ -21,7 +22,7 @@
 
             <!-- Center Text -->
             <div class="header-center">
-                <h1 class="hospital-title">asdfBATAAN GENERAL HOSPITAL AND MEDICAL CENTER</h1>
+                <h1 class="hospital-title">BATAAN GENERAL HOSPITAL AND MEDICAL CENTER</h1>
                 <p class="hospital-subtitle">Balanga City, Bataan<br>ISO-QMS 9001:2015 Certified</p>
             </div>
 
@@ -34,7 +35,7 @@
 
         <!-- PATIENT INFO -->
         <div class="patient-info">
-            <div>Name: <input type="text" name="patient_name" class="text-input"></div>
+            <div>Name: <input type="text" name="patient_name" class="text-input" value="<?php echo $_SESSION['name']; ?>"></div>
             <div>Age/Sex: <input type="text" name="age_sex" class="text-input small"></div>
             <div>Date: <input type="date" name="exam_date" class="text-input small"></div>
         </div>

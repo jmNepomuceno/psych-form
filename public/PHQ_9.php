@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>PHQ-9 Form</title>
     <link rel="stylesheet" href="../assets/css/PHQ_9.css">
-    <!-- <link rel="stylesheet" href="../assets/css/sidebar.css"> -->
+    <link rel="stylesheet" href="../assets/css/header.css">
     <?php require "../links/header_link.php"; ?>
 
 </head>
 <body>
-
+    <?php include 'header.php'; ?>
     <div class="form-container">
         <!-- HEADER -->
         <div class="header">
@@ -42,7 +42,7 @@
         <div class="patient-info">
             <div>
                 Name:
-                <input type="text" name="patient_name" class="text-input">
+                <input type="text" name="patient_name" class="text-input" value="<?php echo $_SESSION['name']; ?>">
             </div>
             <div>
                 Age/Sex:

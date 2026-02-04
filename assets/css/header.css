@@ -1,0 +1,45 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #1f2937;
+    color: #fff;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-name {
+    font-weight: 600;
+}
+
+.btn-back,
+.btn-logout {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-back {
+    background: #374151;
+    color: #fff;
+}
+
+.btn-logout {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-back:hover {
+    background: #4b5563;
+}
+
+.btn-logout:hover {
+    background: #b91c1c;
+}

@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>GAD-7 Form</title>
     <link rel="stylesheet" href="../assets/css/GAD_7.css">
-    <!-- <link rel="stylesheet" href="../assets/css/sidebar.css"> -->
+    <link rel="stylesheet" href="../assets/css/header.css">
+
     <?php require "../links/header_link.php"; ?>
 
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <div class="form-container">
         <!-- HEADER -->
         <div class="header">
@@ -28,7 +30,7 @@
 
             <div class="header-right">
                 <div class="logo phu-logo">
-                    <img src="../source/tcp_DOH.jpg" alt="DOH Logo">
+                    <img src="../source/phu_bg.jpg" alt="DOH Logo">
                 </div>
                 <div class="logo bp-logo">
                     <img src="../source/tcp_BP.jpg" alt="BP Logo">
@@ -41,7 +43,7 @@
         <div class="patient-info">
             <div>
                 Name:
-                <input type="text" name="patient_name" class="text-input">
+                <input type="text" name="patient_name" class="text-input" value="<?php echo $_SESSION['name']; ?>">
             </div>
             <div>
                 Age/Sex:

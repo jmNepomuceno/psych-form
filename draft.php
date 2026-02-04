@@ -9,12 +9,13 @@
     // $result = $soap->GetESignature($param)->GetESignatureResult;
     // echo "<pre>"; print_r($result); echo "</pre>";
 
-    $sql = "describe parq_form";
+    $sql = "SELECT * FROM gad_7";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo '<pre>'; print_r($data); echo '</pre>';
+    // echo '<pre>'; print_r($data); echo '</pre>';
+    echo '<pre>'; print_r($_SESSION); echo '</pre>';
 
     // $sql = "SELECT * FROM gad_7";
     // $stmt = $pdo->prepare($sql);

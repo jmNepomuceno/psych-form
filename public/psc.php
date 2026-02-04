@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GAD-7 Form</title>
+    <title>Perceived Stress Scale (PSS-10)</title>
     <link rel="stylesheet" href="../assets/css/psc.css">
-    <!-- <link rel="stylesheet" href="../assets/css/sidebar.css"> -->
+    <link rel="stylesheet" href="../assets/css/header.css">
     <?php require "../links/header_link.php"; ?>
 
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <div class="form-container">
 
         <!-- HEADER -->
@@ -34,7 +35,7 @@
 
         <!-- PATIENT INFO -->
         <div class="patient-info">
-            <div>Name: <input type="text" name="patient_name" class="text-input"></div>
+            <div>Name: <input type="text" name="patient_name" class="text-input" value="<?php echo $_SESSION['name']; ?>"></div>
             <div>Age/Sex: <input type="text" name="age_sex" class="text-input small"></div>
             <div>Date: <input type="date" name="exam_date" class="text-input small"></div>
         </div>
