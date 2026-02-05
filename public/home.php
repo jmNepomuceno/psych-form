@@ -1,3 +1,7 @@
+<?php 
+    include('../assets/connection/connection.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +36,6 @@
 
         <!-- DASHBOARD CARDS SECTION -->
         <div class="card-grid">
-
             <!-- GAD-7 -->
             <div class="dashboard-card">
                 <h2>GAD-7 Assessment</h2>
@@ -113,15 +116,16 @@
             </div>
 
             <!-- Reports -->
-            <div class="dashboard-card card-secondary">
-                <h2>Reports & Dashboard</h2>
-                <p>
-                    View statistics, trends, and summarized results
-                    for PHU monitoring.
-                </p>
-                <a href="../public/dashboard.php">View</a>
-            </div>
-
+            <?php if($_SESSION['user'] == 2078 || $_SESSION['user'] == 3858){ ?>
+                <div class="dashboard-card card-secondary">
+                    <h2>Reports & Dashboard</h2>
+                    <p>
+                        View statistics, trends, and summarized results
+                        for PHU monitoring.
+                    </p>
+                    <a href="../public/dashboard.php">View</a>
+                </div>
+            <?php } ?>
         </div>
 
     </div>
