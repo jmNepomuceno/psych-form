@@ -8,7 +8,7 @@ body {
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: linear-gradient(180deg, #eef2f6 0%, #f8fafc 100%);
     margin: 0;
-    padding: 30px 20px;
+    padding: 0;
     color: #2c3e50;
     height: 100vh;
 }
@@ -36,7 +36,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    font-size: 2rem;
     margin:50px;
 }
 
@@ -340,7 +340,7 @@ table.dataTable tbody tr:hover {
 }
 
 .logo-row img {
-    height: 120px;
+    height: 100px;
     object-fit: contain;
 }
 

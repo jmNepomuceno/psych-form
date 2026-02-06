@@ -179,7 +179,7 @@ $(document).ready(function () {
                     $('input').val('').prop('checked', false);
                     $('#totalScore').val('');
 
-                    // window.location.href = 'http://192.168.42.15:8035/';
+                    window.location.href = 'http://192.168.42.15:8035/';
                 },
                 error: function () {
                     alert('Error saving PHQ-9');

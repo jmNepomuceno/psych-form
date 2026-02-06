@@ -5,10 +5,11 @@
     <title>PHU Dashboard</title>
 
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <!-- <link rel="stylesheet" href="../assets/css/sidebar.css"> -->
+    <link rel="stylesheet" href="../assets/css/header.css">
     <?php require "../links/header_link.php"; ?>
 </head>
 <body>
+    <?php include 'header.php'; ?>
 
     <div class="dashboard-container">
         <!-- <div class="logo-row">
