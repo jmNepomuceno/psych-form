@@ -63,92 +63,92 @@
             <tbody>
                 <tr>
                     <td>1. How often do you have a drink containing alcohol?</td>
-                    <td><input type="radio" name="q1" value="0"></td>
-                    <td><input type="radio" name="q1" value="1"></td>
-                    <td><input type="radio" name="q1" value="2"></td>
-                    <td><input type="radio" name="q1" value="3"></td>
-                    <td><input type="radio" name="q1" value="4"></td>
+                    <td><input type="radio" name="q1" value="0">Never</td>
+                    <td><input type="radio" name="q1" value="1">Monthly or Less</td>
+                    <td><input type="radio" name="q1" value="2">2-4 times a month</td>
+                    <td><input type="radio" name="q1" value="3">2-3 times a week</td>
+                    <td><input type="radio" name="q1" value="4">+ times a week</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>2. How many drinks containing alcohol do you have on a typical day when you are drinking?</td>
-                    <td><input type="radio" name="q2" value="0"></td>
-                    <td><input type="radio" name="q2" value="1"></td>
-                    <td><input type="radio" name="q2" value="2"></td>
-                    <td><input type="radio" name="q2" value="3"></td>
-                    <td><input type="radio" name="q2" value="4"></td>
+                    <td><input type="radio" name="q2" value="0">1 or 2</td>
+                    <td><input type="radio" name="q2" value="1">3 or 4</td>
+                    <td><input type="radio" name="q2" value="2">5 or 6</td>
+                    <td><input type="radio" name="q2" value="3">7 to 9</td>
+                    <td><input type="radio" name="q2" value="4">10 or more</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>3. How often do you have six or more drinks on one occasion?</td>
-                    <td><input type="radio" name="q3" value="0"></td>
-                    <td><input type="radio" name="q3" value="1"></td>
-                    <td><input type="radio" name="q3" value="2"></td>
-                    <td><input type="radio" name="q3" value="3"></td>
-                    <td><input type="radio" name="q3" value="4"></td>
+                    <td><input type="radio" name="q3" value="0">Never</td>
+                    <td><input type="radio" name="q3" value="1">Less than a month</td>
+                    <td><input type="radio" name="q3" value="2">Monthly</td>
+                    <td><input type="radio" name="q3" value="3">Weekly</td>
+                    <td><input type="radio" name="q3" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>4. How often during the last year have you found that you were not able to stop drinking once you had started?</td>
-                    <td><input type="radio" name="q4" value="0"></td>
-                    <td><input type="radio" name="q4" value="1"></td>
-                    <td><input type="radio" name="q4" value="2"></td>
-                    <td><input type="radio" name="q4" value="3"></td>
-                    <td><input type="radio" name="q4" value="4"></td>
+                    <td><input type="radio" name="q4" value="0">Never</td>
+                    <td><input type="radio" name="q4" value="1">Less than a month</td>
+                    <td><input type="radio" name="q4" value="2">Monthly</td>
+                    <td><input type="radio" name="q4" value="3">Weekly</td>
+                    <td><input type="radio" name="q4" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>5. How often during the last year have you failed to do what was normally expected of you because of drinking?</td>
-                    <td><input type="radio" name="q5" value="0"></td>
-                    <td><input type="radio" name="q5" value="1"></td>
-                    <td><input type="radio" name="q5" value="2"></td>
-                    <td><input type="radio" name="q5" value="3"></td>
-                    <td><input type="radio" name="q5" value="4"></td>
+                    <td><input type="radio" name="q5" value="0">Never</td>
+                    <td><input type="radio" name="q5" value="1">Less than a month</td>
+                    <td><input type="radio" name="q5" value="2">Monthly</td>
+                    <td><input type="radio" name="q5" value="3">Weekly</td>
+                    <td><input type="radio" name="q5" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>6. How often during the last year have you needed a drink first thing in the morning to get yourself going after a heavy drinking session?</td>
-                    <td><input type="radio" name="q6" value="0"></td>
-                    <td><input type="radio" name="q6" value="1"></td>
-                    <td><input type="radio" name="q6" value="2"></td>
-                    <td><input type="radio" name="q6" value="3"></td>
-                    <td><input type="radio" name="q6" value="4"></td>
+                    <td><input type="radio" name="q6" value="0">Never</td>
+                    <td><input type="radio" name="q6" value="1">Less than a month</td>
+                    <td><input type="radio" name="q6" value="2">Monthly</td>
+                    <td><input type="radio" name="q6" value="3">Weekly</td>
+                    <td><input type="radio" name="q6" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>7. How often during the last year have you had a feeling of guilt or remorse after drinking?</td>
-                    <td><input type="radio" name="q7" value="0"></td>
-                    <td><input type="radio" name="q7" value="1"></td>
-                    <td><input type="radio" name="q7" value="2"></td>
-                    <td><input type="radio" name="q7" value="3"></td>
-                    <td><input type="radio" name="q7" value="4"></td>
+                    <td><input type="radio" name="q7" value="0">Never</td>
+                    <td><input type="radio" name="q7" value="1">Less than a month</td>
+                    <td><input type="radio" name="q7" value="2">Monthly</td>
+                    <td><input type="radio" name="q7" value="3">Weekly</td>
+                    <td><input type="radio" name="q7" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>8. How often during the last year have you been unable to remember what happened the night before because of your drinking?</td>
-                    <td><input type="radio" name="q8" value="0"></td>
-                    <td><input type="radio" name="q8" value="1"></td>
-                    <td><input type="radio" name="q8" value="2"></td>
-                    <td><input type="radio" name="q8" value="3"></td>
-                    <td><input type="radio" name="q8" value="4"></td>
+                    <td><input type="radio" name="q8" value="0">Never</td>
+                    <td><input type="radio" name="q8" value="1">Less than a month</td>
+                    <td><input type="radio" name="q8" value="2">Monthly</td>
+                    <td><input type="radio" name="q8" value="3">Weekly</td>
+                    <td><input type="radio" name="q8" value="4">Daily or Almost Daily</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>9. Have you or someone else been injured because of your drinking?</td>
-                    <td><input type="radio" name="q9" value="0"></td>
-                    <td><input type="radio" name="q9" value="1"></td>
-                    <td><input type="radio" name="q9" value="2"></td>
-                    <td><input type="radio" name="q9" value="3"></td>
-                    <td><input type="radio" name="q9" value="4"></td>
+                    <td><input type="radio" name="q9" value="0">No</td>
+                    <td><input type="radio" name="q9" value="1">-</td>
+                    <td><input type="radio" name="q9" value="2">Yes, but not in the last year</td>
+                    <td><input type="radio" name="q9" value="3">-</td>
+                    <td><input type="radio" name="q9" value="4">Yes, during the last year</td>
                     <td class="score-cell"></td>
                 </tr>
                 <tr>
                     <td>10. Has a relative, friend, doctor or other healthcare worker been concerned about your drinking or suggested you cut down?</td>
-                    <td><input type="radio" name="q10" value="0"></td>
-                    <td><input type="radio" name="q10" value="1"></td>
-                    <td><input type="radio" name="q10" value="2"></td>
-                    <td><input type="radio" name="q10" value="3"></td>
-                    <td><input type="radio" name="q10" value="4"></td>
+                    <td><input type="radio" name="q10" value="0">No</td>
+                    <td><input type="radio" name="q10" value="1">-</td>
+                    <td><input type="radio" name="q10" value="2">Yes, but not in the last year</td>
+                    <td><input type="radio" name="q10" value="3">-</td>
+                    <td><input type="radio" name="q10" value="4">Yes, during the last year</td>
                     <td class="score-cell"></td>
                 </tr>
             </tbody>
