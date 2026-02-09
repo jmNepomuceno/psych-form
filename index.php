@@ -19,7 +19,10 @@
     <div class="container">
         <!-- Left illustration -->
         <div class="illustration">
-            <h1>PHU Assessment System</h1>
+            <h1>Health & Wellness Clinic 
+                <span>Public Health Unit</span>
+                <span>Digital Assessment Forms System</span>
+            </h1>
             <p class="description">
                 A secure digital platform for psychological and health screening assessments in support of patient care and well-being.
             </p>
@@ -52,6 +55,7 @@
                 <input type="text" placeholder="Username" id="username" required autocomplete="off">
                 <input type="password" placeholder="Password" id="password" required autocomplete="off">
                 <button type="submit" id="login-btn">Login</button>
+                <p class="login-link">Use your portal account to log in.</p>
                 <p class="login-link">Don't have an account? <a href="#">Sign up</a></p>
             </form>
 

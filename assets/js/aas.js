@@ -129,14 +129,101 @@ $(document).ready(function() {
     });
 
     // Submit form
+    // $('#submitForm').on('click', function () {
+    //     const totalScore = calculateAUDITScore();
+    //     const severity = getAUDITSeverity(totalScore);
+
+    //     // Highlight severity row in table
+    //     $('.severity-table tbody tr').removeClass('active').each(function () {
+    //         const min = parseInt($(this).data('min'));
+    //         const max = parseInt($(this).data('max'));
+    //         if (totalScore >= min && totalScore <= max) {
+    //             $(this).addClass('active');
+    //         }
+    //     });
+
+    //     // Update result in modal
+    //     $('#auditResultScore').text(totalScore);
+    //     $('#auditResultSeverity')
+    //         .removeClass()
+    //         .addClass('severity-badge severity-' + severity.replace(/ /g, ''))
+    //         .text(severity);
+
+    //     // Consent logic (Moderate Risk & above)
+    //     if (['Moderate Risk', 'High Risk', 'Possible Dependence'].includes(severity)) {
+    //         $('#auditConsentSection').show();
+    //         $('#auditContactSection').hide();
+    //         $('#auditConfirmSubmit').prop('disabled', true);
+    //         $('input[name="auditConsentChoice"]').prop('checked', false);
+    //         $('#auditContactNumber').val('');
+    //     } else {
+    //         $('#auditConsentSection').hide();
+    //         $('#auditContactSection').hide();
+    //         $('#auditConfirmSubmit').prop('disabled', false);
+    //     }
+
+    //     // Show modal
+    //     $('#auditResultModal').fadeIn();
+    // });
+
     $('#submitForm').on('click', function () {
+        let isValid = true;
+        let missingFields = [];
+
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // AUDIT Questions Validation (q1–q10)
+        // ===============================
+        for (let i = 1; i <= 10; i++) {
+            if (!$('input[name="q' + i + '"]:checked').length) {
+                isValid = false;
+                missingFields.push('Question ' + i);
+            }
+        }
+
+        // ===============================
+        // Stop submission if invalid
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required fields before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 Stop here
+        }
+
+        // ===============================
+        // Compute score ONLY if valid
+        // ===============================
         const totalScore = calculateAUDITScore();
         const severity = getAUDITSeverity(totalScore);
 
-        // Highlight severity row in table
+        // Highlight severity row
         $('.severity-table tbody tr').removeClass('active').each(function () {
             const min = parseInt($(this).data('min'));
             const max = parseInt($(this).data('max'));
+
             if (totalScore >= min && totalScore <= max) {
                 $(this).addClass('active');
             }
@@ -165,6 +252,7 @@ $(document).ready(function() {
         // Show modal
         $('#auditResultModal').fadeIn();
     });
+
 
     // Consent choice
     $('input[name="auditConsentChoice"]').on('change', function () {
@@ -207,7 +295,7 @@ $(document).ready(function() {
                 $('#totalScore').val('');
 
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/';
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

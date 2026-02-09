@@ -194,8 +194,89 @@ $(document).ready(function() {
     // ===============================
     // 2️⃣ Handle form submission & modal
     // ===============================
-    $('#submitForm').on('click', function() {
+    $('#submitForm').on('click', function () {
 
+        let isValid = true;
+        let missingFields = [];
+
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // Section 1: Q1–Q5 (text inputs)
+        // ===============================
+        for (let i = 1; i <= 5; i++) {
+            if (!$('input[name="q' + i + '"]').val()) {
+                isValid = false;
+                missingFields.push('Question ' + i);
+            }
+        }
+
+        // ===============================
+        // Section 2: Q6a–Q6j (radios)
+        // ===============================
+        const q6letters = ['a','b','c','d','e','f','g','h','i','j'];
+        q6letters.forEach(letter => {
+            if (!$('input[name="q6' + letter + '"]:checked').length) {
+                isValid = false;
+                missingFields.push('Question 6' + letter.toUpperCase());
+            }
+        });
+
+        // ===============================
+        // Section 3: Q7–Q8 (selects)
+        // ===============================
+        if (!$('select[name="q7"]').val()) {
+            isValid = false;
+            missingFields.push('Question 7');
+        }
+
+        if (!$('select[name="q8"]').val()) {
+            isValid = false;
+            missingFields.push('Question 8');
+        }
+
+        // ===============================
+        // Section 4: Q9 (radio)
+        // ===============================
+        if (!$('input[name="q9"]:checked').length) {
+            isValid = false;
+            missingFields.push('Question 9');
+        }
+
+        // ===============================
+        // Stop if invalid
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required PSQI fields before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 block modal
+        }
+
+        // ===============================
+        // Compute score ONLY if valid
+        // ===============================
         const totalScore = calculateTotalScore();
         const severity = getPSQISeverity(totalScore);
 
@@ -203,7 +284,6 @@ $(document).ready(function() {
         $('.severity-table tbody tr').removeClass('active').each(function () {
             const min = parseInt($(this).data('min'));
             const max = parseInt($(this).data('max'));
-
             if (totalScore >= min && totalScore <= max) {
                 $(this).addClass('active');
             }
@@ -212,10 +292,10 @@ $(document).ready(function() {
         $('#psqiResultScore').text(totalScore);
         $('#psqiResultSeverity')
             .removeClass()
-            .addClass('severity-badge severity-' + severity.replace(' ', ''))
+            .addClass('severity-badge severity-' + severity.replace(/\s/g, ''))
             .text(severity);
-        console.log(severity)
-        // Show/hide follow-up section based on severity
+
+        // Follow-up logic (Poor / Very Poor only)
         if (severity === 'Poor' || severity === 'Very Poor') {
             $('#psqiFollowUpSection').show();
             $('#psqiContactSection').hide();
@@ -291,26 +371,29 @@ $(document).ready(function() {
         // ===============================
         // AJAX Submission
         // ===============================
-        // $.ajax({
-        //     url: '../assets/php/save_sqa.php', // PHP handler for PSQI
-        //     method: 'POST',
-        //     data: formData,
-        //     dataType: 'json',
-        //     success: function(response) {
-        //         console.log('Server response:', response);
+        $.ajax({
+            url: '../assets/php/save_sqa.php', // PHP handler for PSQI
+            method: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                console.log('Server response:', response);
 
-        //         // Reset form after submission
-        //         $('input').val('').prop('checked', false);
-        //         $('select').val('');
-        //         $('#totalScore').val('');
-        //         $('.severity-table tbody tr').removeClass('active');
-        //         $('#psqiResultModal').fadeOut();
-        //     },
-        //     error: function(xhr, status, error) {
-        //         console.error('Error:', error);
-        //         alert('Failed to submit form.');
-        //     }
-        // });
+                // Reset form after submission
+                $('input').val('').prop('checked', false);
+                $('select').val('');
+                $('#totalScore').val('');
+                $('.severity-table tbody tr').removeClass('active');
+                $('#psqiResultModal').fadeOut();
+
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Failed to submit form.');
+            }
+        });
     });
 
 });

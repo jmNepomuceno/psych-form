@@ -2,6 +2,8 @@
     include('./session.php');
     include('./assets/connection/connection.php');
     
+    // 2 weeks
+    // emergency contact 
 
     // $webservice = "http://192.168.42.10:8081/EmpPortal.asmx?wsdl";
     // $param = array("bioID" => 3658 , "pincode" => "030898");

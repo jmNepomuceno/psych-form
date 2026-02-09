@@ -152,8 +152,93 @@ $(document).ready(function() {
     //     });
     // });
 
-    $('#submitForm').on('click', function () {
+    // $('#submitForm').on('click', function () {
 
+    //     let totalScore = parseInt($('#totalScore').val() || 0);
+    //     let severity = getFTNDSeverity(totalScore);
+
+    //     // Highlight row
+    //     $('.severity-table tbody tr').removeClass('active').each(function () {
+    //         let min = $(this).data('min');
+    //         let max = $(this).data('max');
+
+    //         if (totalScore >= min && totalScore <= max) {
+    //             $(this).addClass('active');
+    //         }
+    //     });
+
+    //     $('#ftndResultScore').text(totalScore);
+    //     $('#ftndResultSeverity')
+    //         .removeClass()
+    //         .addClass('severity-badge severity-' + severity.replace(' ', ''))
+    //         .text(severity);
+
+    //     // Consent logic (High / Very High)
+    //     if (severity === 'High' || severity === 'Very High') {
+    //         $('#ftndConsentSection').show();
+    //         $('#ftndContactSection').hide();
+    //         $('#ftndConfirmSubmit').prop('disabled', true);
+    //         $('input[name="ftndConsentChoice"]').prop('checked', false);
+    //         $('#ftndContactNumber').val('');
+    //     } else {
+    //         $('#ftndConsentSection').hide();
+    //         $('#ftndContactSection').hide();
+    //         $('#ftndConfirmSubmit').prop('disabled', false);
+    //     }
+
+    //     $('#ftndResultModal').fadeIn();
+    // });
+
+    $('#submitForm').on('click', function () {
+        let isValid = true;
+        let missingFields = [];
+
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // FTND Questions Validation (q1–q6)
+        // ===============================
+        for (let i = 1; i <= 6; i++) {
+            if (!$('input[name="q' + i + '"]:checked').length) {
+                isValid = false;
+                missingFields.push('Question ' + i);
+            }
+        }
+
+        // ===============================
+        // Stop if any field is missing
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required fields before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 Do not compute or show modal
+        }
+
+        // ===============================
+        // Compute score ONLY if valid
+        // ===============================
         let totalScore = parseInt($('#totalScore').val() || 0);
         let severity = getFTNDSeverity(totalScore);
 
@@ -170,7 +255,7 @@ $(document).ready(function() {
         $('#ftndResultScore').text(totalScore);
         $('#ftndResultSeverity')
             .removeClass()
-            .addClass('severity-badge severity-' + severity.replace(' ', ''))
+            .addClass('severity-badge severity-' + severity.replace(/\s/g, ''))
             .text(severity);
 
         // Consent logic (High / Very High)
@@ -188,6 +273,7 @@ $(document).ready(function() {
 
         $('#ftndResultModal').fadeIn();
     });
+
 
     $('input[name="ftndConsentChoice"]').on('change', function () {
         $('#ftndConfirmSubmit').prop('disabled', false);
@@ -225,7 +311,7 @@ $(document).ready(function() {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
-                window.location.href = 'http://192.168.42.15:8035/';
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

@@ -118,8 +118,99 @@ $(document).ready(function () {
     });
 
 
+    // $('#submitForm').on('click', function () {
+
+    //     let totalScore = parseInt($('#totalScore').val() || 0);
+    //     let severity = getGADSeverity(totalScore);
+
+    //     // ===== Highlight severity row =====
+    //     $('.severity-table tbody tr').removeClass('active').each(function () {
+    //         let min = $(this).data('min');
+    //         let max = $(this).data('max');
+
+    //         if (totalScore >= min && totalScore <= max) {
+    //             $(this).addClass('active');
+    //         }
+    //     });
+
+    //     // ===== Result values =====
+    //     $('#resultScore').text(totalScore);
+    //     $('#resultSeverity')
+    //         .removeClass()
+    //         .addClass('severity-badge severity-' + severity)
+    //         .text(severity);
+
+    //     // ===== Consent logic =====
+    //     if (severity === 'Moderate' || severity === 'Severe') {
+    //         $('#consentSection').show();
+    //         $('#contactSection').hide();
+    //         $('#confirmSubmit').prop('disabled', true);
+    //         $('input[name="consentChoice"]').prop('checked', false);
+    //         $('#contactNumber').val('');
+    //     } else {
+    //         $('#consentSection').hide();
+    //         $('#contactSection').hide();
+    //         $('#confirmSubmit').prop('disabled', false);
+    //     }
+
+    //     $('#resultModal').fadeIn();
+    // });
+
+
+    // ===== Consent choice handler =====
+    
+
     $('#submitForm').on('click', function () {
 
+        let isValid = true;
+        let missingFields = [];
+
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // GAD-7 Questions Validation (q1–q7)
+        // ===============================
+        for (let i = 1; i <= 7; i++) {
+            if (!$('input[name="q' + i + '"]:checked').length) {
+                isValid = false;
+                missingFields.push('Question ' + i);
+            }
+        }
+
+        // ===============================
+        // Stop if invalid
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required fields before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 block modal
+        }
+
+        // ===============================
+        // Compute score ONLY if valid
+        // ===============================
         let totalScore = parseInt($('#totalScore').val() || 0);
         let severity = getGADSeverity(totalScore);
 
@@ -157,7 +248,8 @@ $(document).ready(function () {
     });
 
 
-    // ===== Consent choice handler =====
+    
+    
     $('input[name="consentChoice"]').on('change', function () {
 
         $('#confirmSubmit').prop('disabled', false);
@@ -200,7 +292,7 @@ $(document).ready(function () {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
-                window.location.href = 'http://192.168.42.15:8035/';
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

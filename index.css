@@ -18,28 +18,39 @@ body {
 }
 
 /* Left illustration */
-.illustration {
-    flex: 1;
-    background: linear-gradient(135deg, #9fa6f7, #7179e0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: #fff;
-    padding: 30px 20px;
-    position: relative;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+.illustration h1 {
+    max-width: 360px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    line-height: 1.35;
+    font-weight: 700;
+    color: #ffffff; /* main title brighter */
 }
 
-.illustration h2 {
-    max-width: 260px;
+/* Stack the spans and give hierarchy */
+.illustration h1 span {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #cfd8ff; /* softer, secondary text */
+}
+
+/* Make the last span slightly lighter */
+.illustration h1 span:last-child {
+    font-size: 15px;
+    color: #b8c4ff;
+}
+
+.illustration p {
+    max-width: 420px;
     text-align: center;
     margin-bottom: 40px;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #dbe2ff; /* softer than title */
 }
+
 
 /* 3D circle + stethoscope */
 .circle {

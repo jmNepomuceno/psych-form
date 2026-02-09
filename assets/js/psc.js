@@ -136,6 +136,55 @@ $(document).ready(function() {
 
     // Submit form
     $('#submitForm').on('click', function () {
+        let isValid = true;
+        let missingFields = [];
+
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // PSS Questions Validation (q1–q10)
+        // ===============================
+        for (let i = 1; i <= 10; i++) {
+            if (!$('input[name="q' + i + '"]:checked').length) {
+                isValid = false;
+                missingFields.push('Question ' + i);
+            }
+        }
+
+        // ===============================
+        // Stop if invalid
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required PSS fields before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 block modal
+        }
+
+        // ===============================
+        // Compute score ONLY if valid
+        // ===============================
         const totalScore = calculatePSSScore();
         const severity = getPSSSeverity(totalScore);
 
@@ -152,25 +201,26 @@ $(document).ready(function() {
         $('#pssResultScore').text(totalScore);
         $('#pssResultSeverity')
             .removeClass()
-            .addClass('severity-badge severity-' + severity.replace(' ', ''))
+            .addClass('severity-badge severity-' + severity.replace(/\s/g, ''))
             .text(severity);
 
         // Consent logic (High Stress only)
         if (severity === 'High Stress') {
-            $('#pssConsentSection').show();       // show consent section
-            $('#pssContactSection').hide();       // hide contact input initially
-            $('#pssConfirmSubmit').prop('disabled', true); // disable confirm until user selects
-            $('input[name="pssConsentChoice"]').prop('checked', false); // reset radios
-            $('#pssContactNumber').val('');       // clear contact field
+            $('#pssConsentSection').show();
+            $('#pssContactSection').hide();
+            $('#pssConfirmSubmit').prop('disabled', true);
+            $('input[name="pssConsentChoice"]').prop('checked', false);
+            $('#pssContactNumber').val('');
         } else {
             $('#pssConsentSection').hide();
             $('#pssContactSection').hide();
-            $('#pssConfirmSubmit').prop('disabled', false); // enable confirm immediately
+            $('#pssConfirmSubmit').prop('disabled', false);
         }
 
         // Show modal
         $('#pssResultModal').fadeIn();
     });
+
 
     $('input[name="pssConsentChoice"]').on('change', function () {
         $('#pssConfirmSubmit').prop('disabled', false);
@@ -182,7 +232,6 @@ $(document).ready(function() {
             $('#pssContactNumber').val('');
         }
     });
-
 
     // Confirm submit
     $('#pssConfirmSubmit').on('click', function () {
@@ -214,7 +263,7 @@ $(document).ready(function() {
                 $('#totalScore').val('');
 
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/';
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

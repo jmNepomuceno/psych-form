@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GAD-7 Form</title>
+    <title>PAR-Q+ Form</title>
     <link rel="stylesheet" href="../assets/css/parq.css">
     <link rel="stylesheet" href="../assets/css/header.css">
     <?php require "../links/header_link.php"; ?>

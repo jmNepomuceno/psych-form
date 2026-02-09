@@ -196,10 +196,70 @@ $(document).ready(function () {
     // SUBMIT FORM
     // ===========================
     $('#submitForm').on('click', function () {
+        let isValid = true;
+        let missingFields = [];
 
+        // ===============================
+        // Patient Info Validation
+        // ===============================
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        // ===============================
+        // PAR-Q Questions ONLY (exclude consent)
+        // ===============================
+        const questionNames = [];
+
+        $('input[type="radio"]').each(function () {
+            const name = $(this).attr('name');
+
+            // 🚫 Exclude consent radios
+            if (name === 'parqConsentChoice') return;
+
+            if (!questionNames.includes(name)) {
+                questionNames.push(name);
+            }
+        });
+
+        questionNames.forEach(function (name) {
+            if (!$('input[name="' + name + '"]:checked').length) {
+                isValid = false;
+                missingFields.push(name.replace(/_/g, ' ').toUpperCase());
+            }
+        });
+
+        // ===============================
+        // Stop if invalid
+        // ===============================
+        if (!isValid) {
+            alert(
+                'Please complete all required PAR-Q questions before proceeding.\n\nMissing:\n- ' +
+                missingFields.join('\n- ')
+            );
+            return; // 🚫 block modal
+        }
+
+        // ===============================
+        // Compute result ONLY if valid
+        // ===============================
         const result = getPARQResult();
 
-        // Update modal text
         $('#parqResultStatus')
             .removeClass()
             .addClass(
@@ -224,6 +284,8 @@ $(document).ready(function () {
 
         $('#parqResultModal').fadeIn();
     });
+
+
 
     // ===========================
     // CONSENT CHOICE
@@ -272,7 +334,7 @@ $(document).ready(function () {
                 $('input').val('').prop('checked', false);
 
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/';
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });
