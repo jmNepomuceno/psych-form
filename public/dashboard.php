@@ -239,7 +239,7 @@
                 <!-- FORM VIEW -->
                 <div class="form-view">
                     <iframe id="assessmentFrame"
-                            style="width:100%;height:80vh;border:none;"></iframe>
+                            style="width:100%;height:150vh;border:none;"></iframe>
                 </div>
 
             </div>

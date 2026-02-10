@@ -411,20 +411,89 @@ table.dataTable tbody tr:hover {
 ========================== */
 .severity-badge {
     padding: 0.35rem 0.75rem;
-    border-radius: 999px;    /* pill shape */
+    border-radius: 999px;
     font-weight: 600;
     display: inline-block;
     text-transform: capitalize;
     min-width: 70px;
     text-align: center;
     color: #fff;
+    font-size: 0.85rem;
 }
 
-/* Severity Colors */
-.severity-badge.minimal { background: #16a34a; }   /* green */
-.severity-badge.mild { background: #0ea5e9; }      /* blue */
-.severity-badge.moderate { background: #f59e0b; }  /* amber/orange */
-.severity-badge.severe { background: #dc2626; }    /* red */
+/* Mental health scales */
+.severity-badge.minimal {
+    background: #16a34a; /* green */
+}
+
+.severity-badge.mild {
+    background: #0ea5e9; /* blue */
+}
+
+.severity-badge.moderate {
+    background: #f59e0b; /* amber */
+}
+
+.severity-badge.moderately-severe {
+    background: #ea580c; /* deeper orange */
+}
+
+.severity-badge.severe {
+    background: #dc2626; /* red */
+}
+
+/* AUDIT / risk-based */
+.severity-badge.low-risk,
+.severity-badge.very-low,
+.severity-badge.good {
+    background: #22c55e; /* green */
+}
+
+.severity-badge.moderate-risk,
+.severity-badge.poor {
+    background: #facc15; /* yellow */
+    color: #000;
+}
+
+.severity-badge.high-risk,
+.severity-badge.high {
+    background: #fb7185; /* pink/red */
+}
+
+.severity-badge.very-high,
+.severity-badge.very-poor,
+.severity-badge.possible-dependence {
+    background: #7f1d1d; /* dark red */
+}
+
+/* Stress scale */
+.severity-badge.low-stress {
+    background: #22c55e;
+}
+
+.severity-badge.moderate-stress {
+    background: #f59e0b;
+}
+
+.severity-badge.high-stress {
+    background: #dc2626;
+}
+
+/* PAR-Q */
+.severity-badge.cleared-for-physical-activity {
+    background: #16a34a;
+}
+
+.severity-badge.medical-clearance-required {
+    background: #b91c1c;
+}
+
+/* Table highlight */
+.severity-table tr.active {
+    background: rgba(59, 130, 246, 0.12);
+    font-weight: 600;
+}
+
 
 /* ==========================
    SEVERITY TABLE

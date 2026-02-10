@@ -56,7 +56,7 @@
                 <input type="password" placeholder="Password" id="password" required autocomplete="off">
                 <button type="submit" id="login-btn">Login</button>
                 <p class="login-link">Use your portal account to log in.</p>
-                <p class="login-link">Don't have an account? <a href="#">Sign up</a></p>
+                <p class="login-link">Don't have an account? <a href="http://192.168.42.245:8085/">Sign up</a></p>
             </form>
 
             <div class="context-icons">

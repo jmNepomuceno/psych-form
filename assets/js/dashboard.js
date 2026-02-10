@@ -162,6 +162,9 @@ $(document).ready(function () {
             });
         });
     }
+
+    
+
     
     const initialized = {};
 
@@ -299,7 +302,50 @@ function viewBtn(type) {
    VIEW MODAL
 ========================== */
 function viewForm(type, id, score, severity) {
+    const severityConfig = {
+        gad7: [
+            { min: 0, max: 4, label: 'Minimal' },
+            { min: 5, max: 9, label: 'Mild' },
+            { min: 10, max: 14, label: 'Moderate' },
+            { min: 15, max: 21, label: 'Severe' }
+        ],
+        phq9: [
+            { min: 0, max: 4, label: 'Minimal' },
+            { min: 5, max: 9, label: 'Mild' },
+            { min: 10, max: 14, label: 'Moderate' },
+            { min: 15, max: 19, label: 'Moderately Severe' },
+            { min: 20, max: 27, label: 'Severe' }
+        ],
+        audit: [
+            { min: 0, max: 7, label: 'Low Risk' },
+            { min: 8, max: 15, label: 'Moderate Risk' },
+            { min: 16, max: 19, label: 'High Risk' },
+            { min: 20, max: 40, label: 'Possible Dependence' }
+        ],
+        fager: [
+            { min: 0, max: 2, label: 'Very Low' },
+            { min: 3, max: 4, label: 'Low' },
+            { min: 5, max: 5, label: 'Moderate' },
+            { min: 6, max: 7, label: 'High' },
+            { min: 8, max: 10, label: 'Very High' }
+        ],
+        pss: [
+            { min: 0, max: 13, label: 'Low Stress' },
+            { min: 14, max: 26, label: 'Moderate Stress' },
+            { min: 27, max: 40, label: 'High Stress' }
+        ],
+        psqi: [
+            { min: 0, max: 4, label: 'Good' },
+            { min: 5, max: 10, label: 'Poor' },
+            { min: 11, max: 21, label: 'Very Poor' }
+        ],
+        parq: [
+            { min: 0, max: 0, label: 'Cleared for Physical Activity' },
+            { min: 1, max: 1, label: 'Medical Clearance Required' }
+        ]
+    };
 
+    
     const titles = {
         phq9: 'PHQ-9 Assessment',
         gad7: 'GAD-7 Assessment',
@@ -326,10 +372,20 @@ function viewForm(type, id, score, severity) {
     $('#viewScore').text(score);
     $('#viewSeverity')
         .text(severity)
-        .attr('class', 'severity-badge ' + severity.toLowerCase());
+        .attr('class', 'severity-badge ' + severity.toLowerCase().replace(/\s/g,'-'));
 
-    // Highlight severity row (same logic as home.js)
-    $('.severity-table tr').removeClass('active').each(function () {
+    // Build severity table dynamically
+    const tableRows = severityConfig[type].map(item => {
+        return `<tr data-min="${item.min}" data-max="${item.max}">
+                    <td>${item.min}${item.min !== item.max ? '–' + item.max : ''}</td>
+                    <td>${item.label}</td>
+                </tr>`;
+    }).join('');
+
+    $('.severity-table tbody').html(tableRows);
+
+    // Highlight the correct row
+    $('.severity-table tr').removeClass('active').each(function() {
         const min = $(this).data('min');
         const max = $(this).data('max');
         if (score >= min && score <= max) {
@@ -345,6 +401,7 @@ function viewForm(type, id, score, severity) {
 
     $('#viewModal').fadeIn();
 }
+
 
 
 function closeModal() {
