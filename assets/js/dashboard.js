@@ -162,6 +162,7 @@ $(document).ready(function () {
             });
         });
     }
+    
     const initialized = {};
 
     /* ==========================
@@ -278,24 +279,35 @@ function severityCol() {
 
 function viewBtn(type) {
     return {
-        data: 'id',
-        render: id =>
-            `<button class="btn-view" onclick="viewForm('${type}', ${id})">View</button>`
+        data: null,
+        render: row => `
+            <button class="btn-view"
+                onclick="viewForm(
+                    '${type}',
+                    ${row.id},
+                    ${row.total_score},
+                    '${row.severity}'
+                )">
+                View
+            </button>
+        `
     };
 }
+
 
 /* ==========================
    VIEW MODAL
 ========================== */
-function viewForm(type, id) {
+function viewForm(type, id, score, severity) {
+
     const titles = {
         phq9: 'PHQ-9 Assessment',
         gad7: 'GAD-7 Assessment',
         audit: 'AUDIT Assessment',
         parq: 'PAR-Q+ Assessment',
         psqi: 'PSQI Assessment',
-        fager : "Fagerstrom Test Assessment",
-        pss : "Perceived Stress Scale"
+        fager: 'Fagerstrom Test Assessment',
+        pss: 'Perceived Stress Scale'
     };
 
     const urls = {
@@ -304,16 +316,36 @@ function viewForm(type, id) {
         audit: '../public/aas.php',
         parq: '../public/PARQ.php',
         psqi: '../public/sqa.php',
-        fager : '../public/FTND.php',
-        pss : '../public/psc.php'
+        fager: '../public/FTND.php',
+        pss: '../public/psc.php'
     };
 
     $('#modalTitle').text(titles[type]);
-    $('#modalContent').html(
-        `<iframe src="${urls[type]}?id=${id}" style="width:100%;height:80vh;border:none;"></iframe>`
+
+    // SCORE + SEVERITY
+    $('#viewScore').text(score);
+    $('#viewSeverity')
+        .text(severity)
+        .attr('class', 'severity-badge ' + severity.toLowerCase());
+
+    // Highlight severity row (same logic as home.js)
+    $('.severity-table tr').removeClass('active').each(function () {
+        const min = $(this).data('min');
+        const max = $(this).data('max');
+        if (score >= min && score <= max) {
+            $(this).addClass('active');
+        }
+    });
+
+    // Load read-only form
+    $('#assessmentFrame').attr(
+        'src',
+        `${urls[type]}?id=${id}&view=1`
     );
+
     $('#viewModal').fadeIn();
 }
+
 
 function closeModal() {
     $('#viewModal').fadeOut();

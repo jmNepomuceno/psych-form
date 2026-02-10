@@ -212,9 +212,38 @@
                 <button class="modal-close">&times;</button>
             </div>
 
-            <div class="modal-body" id="modalContent">
-                <p>This is the modal content. You can add text, tables, forms, or other elements here.</p>
+            <div class="modal-body">
+
+                <!-- RESULT SUMMARY -->
+                <div class="result-summary">
+                    <div>
+                        <span class="label">Total Score</span>
+                        <span id="viewScore" class="score-value"></span>
+                    </div>
+                    <div>
+                        <span class="label">Severity</span>
+                        <span id="viewSeverity" class="severity-badge"></span>
+                    </div>
+                </div>
+
+                <!-- SEVERITY TABLE (STATIC like home.php) -->
+                <table class="severity-table">
+                    <tbody>
+                        <tr data-min="0" data-max="4"><td>0–4</td><td>Minimal</td></tr>
+                        <tr data-min="5" data-max="9"><td>5–9</td><td>Mild</td></tr>
+                        <tr data-min="10" data-max="14"><td>10–14</td><td>Moderate</td></tr>
+                        <tr data-min="15" data-max="21"><td>15–21</td><td>Severe</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- FORM VIEW -->
+                <div class="form-view">
+                    <iframe id="assessmentFrame"
+                            style="width:100%;height:80vh;border:none;"></iframe>
+                </div>
+
             </div>
+
         </div>
     </div>
 

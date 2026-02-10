@@ -345,6 +345,8 @@ table.dataTable tbody tr:hover {
 }
 
 
+
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -360,5 +362,116 @@ table.dataTable tbody tr:hover {
 
     .summary-card p {
         font-size: 22px;
+    }
+}
+
+
+/* ==========================
+   RESULT SUMMARY
+========================== */
+.result-summary {
+    display: flex;
+    flex-wrap: wrap;          /* stack on smaller screens */
+    justify-content: center;
+    gap: 250px;
+    margin-bottom: 1.8rem;
+    align-items: center;
+
+    width: 90%;
+    margin:20px auto;
+
+}
+
+.result-summary div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.result-summary .label {
+    font-weight: 600;
+    color: #64748b;           /* muted label color */
+    margin-bottom: 0.25rem;
+}
+
+.score-value,
+.severity-badge {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.severity-badge{
+    font-size: 1rem;
+}
+
+/* ==========================
+   SEVERITY BADGES
+========================== */
+.severity-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;    /* pill shape */
+    font-weight: 600;
+    display: inline-block;
+    text-transform: capitalize;
+    min-width: 70px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Severity Colors */
+.severity-badge.minimal { background: #16a34a; }   /* green */
+.severity-badge.mild { background: #0ea5e9; }      /* blue */
+.severity-badge.moderate { background: #f59e0b; }  /* amber/orange */
+.severity-badge.severe { background: #dc2626; }    /* red */
+
+/* ==========================
+   SEVERITY TABLE
+========================== */
+.severity-table {
+    width: 90%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+
+    margin:20px auto;
+}
+
+.severity-table td {
+    padding: 0.65rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: background 0.2s;
+}
+
+.severity-table tr:last-child td {
+    border-bottom: none;
+}
+
+.severity-table tr.active td {
+    background-color: #eff6ff; /* highlight row */
+    font-weight: 600;
+    border-left: 4px solid #2563eb;
+}
+
+/* ==========================
+   RESPONSIVE TWEAK
+========================== */
+@media (max-width: 600px) {
+    .result-summary {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .score-value,
+    .severity-badge {
+        font-size: 1.35rem;
     }
 }
