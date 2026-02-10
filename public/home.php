@@ -43,7 +43,10 @@
                     Generalized Anxiety Disorder screening tool used to assess
                     the severity of anxiety symptoms.
                 </p>
-                <a href="../public/GAD_7.php">Open GAD-7 Form</a>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <a href="../public/GAD_7.php">Open GAD-7 Form</a>
+                </div>
             </div>
 
             <!-- PHQ-9 -->
@@ -53,7 +56,11 @@
                     Patient Health Questionnaire used to screen, diagnose,
                     and monitor depression severity.
                 </p>
-                <a href="../public/PHQ_9.php">Open PHQ-9 Form</a>
+                <button class="prev-assess-btns">Previous Assessments</button>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <a href="../public/PHQ_9.php">Open PHQ-9 Form</a>
+                </div>
             </div>
 
             <!-- Fagerström Test for Nicotine Dependence -->
@@ -64,7 +71,11 @@
                     tool used to assess the level of physical dependence on nicotine among
                     tobacco users.
                 </p>
-                <a href="../public/FTND.php">Open Fagerström Test</a>
+                <button class="prev-assess-btns">Previous Assessments</button>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <a href="../public/FTND.php">Open Fagerström Test</a>
+                </div>
             </div>
 
             <!-- Pittsburgh Sleep Quality Index (PSQI) -->
@@ -76,7 +87,11 @@
                     period. It helps identify individuals with poor sleep quality who may
                     require further evaluation or intervention.
                 </p>
-                <a href="../public/sqa.php">Open PSQI Assessment</a>
+                <button class="prev-assess-btns">Previous Assessments</button>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <a href="../public/sqa.php">Open PSQI Assessment</a>
+                </div>
             </div>
 
             <!-- Perceived Stress Scale (PSS-10) -->
@@ -88,6 +103,7 @@
                     individuals experiencing high levels of stress who may benefit from stress
                     management guidance or interventions.
                 </p>
+                <button class="prev-assess-btns">Previous Assessments</button>
                 <a href="../public/psc.php">Open PSS-10 Assessment</a>
             </div>
 
@@ -100,7 +116,11 @@
                     problems over the past 12 months. It helps detect risky drinking and alcohol
                     use disorders for appropriate intervention.
                 </p>
-                <a href="../public/aas.php">Open AUDIT Assessment</a>
+                <button class="prev-assess-btns">Previous Assessments</button>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                   <a href="../public/aas.php">Open AUDIT Assessment</a>
+                </div>
             </div>
 
             <div class="dashboard-card">
@@ -112,7 +132,11 @@
                     medical conditions or symptoms that may require medical clearance
                     before starting or increasing physical activity.
                 </p>
-                <a href="../public/parq.php">Open PAR-Q+ Assessment</a>
+                <button class="prev-assess-btns">Previous Assessments</button>
+                <div class="function-div">
+                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <a href="../public/parq.php">Open PAR-Q+ Assessment</a>
+                </div>
             </div>
 
             <!-- Reports -->

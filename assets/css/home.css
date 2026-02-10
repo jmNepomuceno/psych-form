@@ -100,6 +100,15 @@ body {
     line-height: 1.5;
 }
 
+.dashboard-card .function-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap:20px;
+}
+
 .dashboard-card a {
     align-self: flex-start;
     text-decoration: none;
@@ -109,11 +118,38 @@ body {
     border-radius: 6px;
     font-size: 14px;
     transition: background 0.2s ease, transform 0.2s ease;
+    width: 87%;
+    text-align: center;
 }
 
-.dashboard-card a:hover {
+.dashboard-card a:hover,
+.dashboard-card .prev-assess-btns:hover{
     background: #0b5ed7;
     transform: scale(1.05);
+}
+
+.dashboard-card .prev-assess-btns:hover{
+    background: #6b757d;
+}
+
+.dashboard-card .prev-assess-btns{
+    /* margin-bottom: -20px; */
+    background: #28a645;
+
+    align-self: flex-start;
+    text-decoration: none;
+    background: #343a40;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.2s ease, transform 0.2s ease;
+
+    width: 100%;
+    text-align: center;
+    border:none;
+
+    cursor: pointer;
 }
 
 .card-secondary a {
