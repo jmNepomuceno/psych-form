@@ -1,7 +1,3 @@
-<?php 
-    include('../session.php');
-?>
-
 <header class="app-header">
     <div class="header-left">
         <!-- Back / Return Button -->

@@ -1,4 +1,5 @@
 <?php 
+    include('../session.php');
     include('../assets/connection/connection.php');
 ?>
 
@@ -10,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="stylesheet" href="../assets/css/header.css">
+
+    <?php require "../links/header_link.php"; ?>
+
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -44,7 +48,7 @@
                     the severity of anxiety symptoms.
                 </p>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns" data-type="gad7">Previous Assessments</button>
                     <a href="../public/GAD_7.php">Open GAD-7 Form</a>
                 </div>
             </div>
@@ -56,9 +60,8 @@
                     Patient Health Questionnaire used to screen, diagnose,
                     and monitor depression severity.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns" data-type="phq9">Previous Assessments</button>
                     <a href="../public/PHQ_9.php">Open PHQ-9 Form</a>
                 </div>
             </div>
@@ -71,9 +74,8 @@
                     tool used to assess the level of physical dependence on nicotine among
                     tobacco users.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns" data-type="ftnd">Previous Assessments</button>
                     <a href="../public/FTND.php">Open Fagerström Test</a>
                 </div>
             </div>
@@ -87,9 +89,8 @@
                     period. It helps identify individuals with poor sleep quality who may
                     require further evaluation or intervention.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns"  data-type="psqi">Previous Assessments</button>
                     <a href="../public/sqa.php">Open PSQI Assessment</a>
                 </div>
             </div>
@@ -103,8 +104,11 @@
                     individuals experiencing high levels of stress who may benefit from stress
                     management guidance or interventions.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
-                <a href="../public/psc.php">Open PSS-10 Assessment</a>
+                
+                <div class="function-div">
+                    <button class="prev-assess-btns" data-type="pss">Previous Assessments</button>
+                    <a href="../public/psc.php">Open PSS-10 Assessment</a>
+                </div>
             </div>
 
             <!-- AUDIT Alcohol Screening Tool -->
@@ -116,9 +120,8 @@
                     problems over the past 12 months. It helps detect risky drinking and alcohol
                     use disorders for appropriate intervention.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns" data-type="audit">Previous Assessments</button>
                    <a href="../public/aas.php">Open AUDIT Assessment</a>
                 </div>
             </div>
@@ -132,9 +135,8 @@
                     medical conditions or symptoms that may require medical clearance
                     before starting or increasing physical activity.
                 </p>
-                <button class="prev-assess-btns">Previous Assessments</button>
                 <div class="function-div">
-                    <button class="prev-assess-btns">Previous Assessments</button>
+                    <button class="prev-assess-btns" data-type="parq">Previous Assessments</button>
                     <a href="../public/parq.php">Open PAR-Q+ Assessment</a>
                 </div>
             </div>
@@ -153,6 +155,70 @@
         </div>
     </div>
 
+    <div id="prevAssessModal" class="modal-overlay" style="display:none;">
+        <div class="modal-box modal-lg">
 
+            <h2 class="modal-title">Previous GAD-7 Assessments</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Patient</th>
+                        <th>Total Score</th>
+                        <th>Severity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="prevAssessTable">
+                    <!-- populated via jQuery -->
+                </tbody>
+            </table>
+
+            <button class="btn-secondary close-prev-modal">Close</button>
+        </div>
+    </div>
+
+    <div id="viewAssessModal" class="modal-overlay" style="display:none;">
+        <div class="modal-box modal-xl">
+
+            <div class="viewAssessModal-header">
+                <h2 id="viewModalTitle" class="modal-title">GAD-7 Assessment</h2>
+                <button id="backToList" class="btn-secondary">← Back to list</button>
+            </div>
+            <!-- RESULT SUMMARY -->
+            <div class="result-summary">
+                <div>
+                    <span class="label">Total Score</span>
+                    <span id="viewScore" class="score-value"></span>
+                </div>
+                <div>
+                    <span class="label">Severity</span>
+                    <span id="viewSeverity" class="severity-badge"></span>
+                </div>
+            </div>
+
+            <!-- SEVERITY TABLE -->
+            <table class="severity-table">
+                <tbody>
+                    <tr data-min="0" data-max="4"><td>0–4</td><td>Minimal</td></tr>
+                    <tr data-min="5" data-max="9"><td>5–9</td><td>Mild</td></tr>
+                    <tr data-min="10" data-max="14"><td>10–14</td><td>Moderate</td></tr>
+                    <tr data-min="15" data-max="21"><td>15–21</td><td>Severe</td></tr>
+                </tbody>
+            </table>
+
+            <!-- FULL FORM -->
+            <div class="form-preview">
+                <iframe id="assessmentFrame"
+                        style="width:100%;height:70vh;border:none;"></iframe>
+            </div>
+
+            <button class="btn-secondary close-view-modal">Close</button>
+        </div>
+    </div>
+
+
+    <script src="../assets/js/home.js"></script>
 </body>
 </html>

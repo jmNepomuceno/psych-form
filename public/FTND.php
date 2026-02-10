@@ -1,3 +1,7 @@
+<?php 
+    include('../session.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +14,14 @@
 
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <?php
+    $viewOnly = isset($_GET['view']) && $_GET['view'] == 1;
+    ?>
+
+    <?php if (!$viewOnly): ?>
+        <?php include 'header.php'; ?>
+    <?php endif; ?>
+    
     <div class="form-container">
         <!-- HEADER -->
         <div class="header">
