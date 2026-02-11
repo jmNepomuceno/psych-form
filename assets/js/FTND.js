@@ -229,11 +229,20 @@ $(document).ready(function() {
         // Stop if any field is missing
         // ===============================
         if (!isValid) {
-            alert(
-                'Please complete all required fields before proceeding.\n\nMissing:\n- ' +
-                missingFields.join('\n- ')
+
+            const message = `
+                Please complete all required fields before proceeding.<br><br>
+                <strong>Missing:</strong><br>
+                • ${missingFields.join('<br>• ')}
+            `;
+
+            showNotificationModal(
+                'Incomplete Form',
+                message,
+                'warning'
             );
-            return; // 🚫 Do not compute or show modal
+
+            return; // 🚫 block submission
         }
 
         // ===============================

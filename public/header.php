@@ -22,3 +22,5 @@
         </form>
     </div>
 </header>
+<?php include 'modal_notif.php'; ?>
+<script src="../assets/js/modal_notif.js"></script>

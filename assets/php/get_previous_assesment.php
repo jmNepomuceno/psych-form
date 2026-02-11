@@ -18,7 +18,7 @@ $assessmentMap = [
     'phq9'  => 'phq_9',
     'ftnd'  => 'fagerstrom_test',
     'psqi'  => 'psqi_assessment',
-    'pss10' => 'pss_test',
+    'pss' => 'pss_test',
     'audit' => 'audit_test',
     'parq'  => 'parq_form'
 ];
@@ -41,7 +41,20 @@ $patientName = $_SESSION['name'];
 /**
  * Fetch assessments for the logged-in user only
  */
-$sql = "
+
+if($type == 'parq'){
+    $sql = "
+        SELECT
+            id,
+            patient_name,
+            result,
+            created_at AS exam_date
+        FROM {$table}
+        WHERE patient_name = :patient_name
+        ORDER BY created_at DESC
+    ";
+}else{
+    $sql = "
     SELECT
         id,
         patient_name,
@@ -53,6 +66,8 @@ $sql = "
     WHERE patient_name = :patient_name
     ORDER BY created_at DESC
 ";
+}
+
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':patient_name', $patientName);

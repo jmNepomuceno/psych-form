@@ -206,11 +206,20 @@ $(document).ready(function() {
         // Stop submission if invalid
         // ===============================
         if (!isValid) {
-            alert(
-                'Please complete all required fields before proceeding.\n\nMissing:\n- ' +
-                missingFields.join('\n- ')
+
+            const message = `
+                Please complete all required fields before proceeding.<br><br>
+                <strong>Missing:</strong><br>
+                • ${missingFields.join('<br>• ')}
+            `;
+
+            showNotificationModal(
+                'Incomplete Form',
+                message,
+                'warning'
             );
-            return; // 🚫 Stop here
+
+            return; // 🚫 block submission
         }
 
         // ===============================

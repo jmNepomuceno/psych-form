@@ -106,27 +106,92 @@ $(document).ready(function () {
 
     $('#submitForm').on('click', function () {
 
+        let isValid = true;
+        let missingFields = [];
+
+        /* ===============================
+        PATIENT INFO VALIDATION
+        =============================== */
+        const patientName = $('input[name="patient_name"]').val().trim();
+        const ageSex = $('input[name="age_sex"]').val().trim();
+        const examDate = $('input[name="exam_date"]').val();
+
+        if (!patientName) {
+            isValid = false;
+            missingFields.push('Patient Name');
+        }
+
+        if (!ageSex) {
+            isValid = false;
+            missingFields.push('Age / Sex');
+        }
+
+        if (!examDate) {
+            isValid = false;
+            missingFields.push('Examination Date');
+        }
+
+        /* ===============================
+        PHQ-9 QUESTIONS (q1–q9)
+        =============================== */
+        for (let i = 1; i <= 9; i++) {
+            if (!$(`input[name="q${i}"]:checked`).length) {
+                isValid = false;
+                missingFields.push(`Question ${i}`);
+            }
+        }
+
+        /* ===============================
+        STOP IF INVALID
+        =============================== */
+        if (!isValid) {
+
+            const message = `
+                Please complete all required fields before proceeding.<br><br>
+                <strong>Missing:</strong><br>
+                • ${missingFields.join('<br>• ')}
+            `;
+
+            showNotificationModal(
+                'Incomplete Form',
+                message,
+                'warning'
+            );
+
+            return; // 🚫 block modal & submission
+        }
+
+        /* ===============================
+        COMPUTE SCORE (ONLY IF VALID)
+        =============================== */
         let totalScore = parseInt($('#totalScore').val() || 0);
         let severity = getPHQSeverity(totalScore);
 
-        // Highlight severity row
-        $('.severity-table tbody tr').removeClass('active');
-        $('.severity-table tbody tr').each(function () {
+        /* ===============================
+        HIGHLIGHT SEVERITY TABLE
+        =============================== */
+        $('.severity-table tbody tr').removeClass('active').each(function () {
             let min = parseInt($(this).data('min'));
             let max = parseInt($(this).data('max'));
+
             if (totalScore >= min && totalScore <= max) {
                 $(this).addClass('active');
             }
         });
 
-        // Severity badge
+        /* ===============================
+        UPDATE RESULT UI
+        =============================== */
         $('#resultScore').text(totalScore);
+
         $('#resultSeverity')
             .removeClass()
-            .addClass('severity-badge severity-' + severity.replace(/\s/g, ''))
+            .addClass('severity-badge severity-' + severity.replace(/\s/g, '').toLowerCase())
             .text(severity);
 
-        // Show consent only if ≥ Moderate
+        /* ===============================
+        CONSENT LOGIC (≥ MODERATE)
+        =============================== */
         if (totalScore >= 10) {
             $('#consentSection').show();
             $('#confirmSubmit').prop('disabled', true);
@@ -136,57 +201,60 @@ $(document).ready(function () {
             $('#confirmSubmit').prop('disabled', false);
         }
 
+        /* ===============================
+        SHOW RESULT MODAL
+        =============================== */
         $('#resultModal').fadeIn();
+    });
 
-        // Enable confirm once consent chosen
-        $('input[name="consentChoice"]').off().on('change', function () {
-            $('#confirmSubmit').prop('disabled', false);
-            if ($(this).val() === 'agree') {
-                $('#contactSection').slideDown();
-            } else {
-                $('#contactSection').slideUp();
-                $('#contactNumber').val('');
+
+    // Enable confirm once consent chosen
+    $('input[name="consentChoice"]').off().on('change', function () {
+        $('#confirmSubmit').prop('disabled', false);
+        if ($(this).val() === 'agree') {
+            $('#contactSection').slideDown();
+        } else {
+            $('#contactSection').slideUp();
+            $('#contactNumber').val('');
+        }
+    });
+
+    // FINAL SAVE
+    $('#confirmSubmit').off().on('click', function () {
+
+        let formData = {};
+
+        formData.patient_name = $('input[name="patient_name"]').val();
+        formData.age_sex = $('input[name="age_sex"]').val();
+        formData.exam_date = $('input[name="exam_date"]').val();
+
+        for (let i = 1; i <= 9; i++) {
+            formData['q' + i] = $('input[name="q' + i + '"]:checked').val() || 0;
+        }
+
+        formData.difficulty = $('input[name="difficulty"]:checked').val() || 0;
+
+        formData.total_score = totalScore;
+        formData.severity = severity;
+        formData.contact_number = $('#contactNumber').val() || null;
+
+        $.ajax({
+            url: '../assets/php/save_phq9.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+                $('#resultModal').fadeOut();
+                $('input').val('').prop('checked', false);
+                $('#totalScore').val('');
+
+                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+            },
+            error: function () {
+                alert('Error saving PHQ-9');
             }
         });
-
-        // FINAL SAVE
-        $('#confirmSubmit').off().on('click', function () {
-
-            let formData = {};
-
-            formData.patient_name = $('input[name="patient_name"]').val();
-            formData.age_sex = $('input[name="age_sex"]').val();
-            formData.exam_date = $('input[name="exam_date"]').val();
-
-            for (let i = 1; i <= 9; i++) {
-                formData['q' + i] = $('input[name="q' + i + '"]:checked').val() || 0;
-            }
-
-            formData.difficulty = $('input[name="difficulty"]:checked').val() || 0;
-
-            formData.total_score = totalScore;
-            formData.severity = severity;
-            formData.contact_number = $('#contactNumber').val() || null;
-
-            $.ajax({
-                url: '../assets/php/save_phq9.php',
-                type: 'POST',
-                data: formData,
-                dataType: 'json',
-                success: function (response) {
-                    console.log(response);
-                    $('#resultModal').fadeOut();
-                    $('input').val('').prop('checked', false);
-                    $('#totalScore').val('');
-
-                    window.location.href = 'http://192.168.42.15:8035/public/home.php';
-                },
-                error: function () {
-                    alert('Error saving PHQ-9');
-                }
-            });
-        });
-
     });
 
     //1

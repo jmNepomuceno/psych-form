@@ -195,69 +195,99 @@ $(document).ready(function () {
     // ===========================
     // SUBMIT FORM
     // ===========================
+    
+    // $('#submitForm').on('click', function () {
+    //     let isValid = true;
+    //     let missingFields = [];
+
+    //     // ===============================
+    //     // Patient Info Validation
+    //     // ===============================
+    //     const patientName = $('input[name="patient_name"]').val().trim();
+    //     const ageSex = $('input[name="age_sex"]').val().trim();
+    //     const examDate = $('input[name="exam_date"]').val();
+
+    //     if (!patientName) {
+    //         isValid = false;
+    //         missingFields.push('Patient Name');
+    //     }
+
+    //     if (!ageSex) {
+    //         isValid = false;
+    //         missingFields.push('Age / Sex');
+    //     }
+
+    //     if (!examDate) {
+    //         isValid = false;
+    //         missingFields.push('Examination Date');
+    //     }
+
+    //     // ===============================
+    //     // PAR-Q Questions ONLY (exclude consent)
+    //     // ===============================
+    //     const questionNames = [];
+
+    //     $('input[type="radio"]').each(function () {
+    //         const name = $(this).attr('name');
+
+    //         // 🚫 Exclude consent radios
+    //         if (name === 'parqConsentChoice') return;
+
+    //         if (!questionNames.includes(name)) {
+    //             questionNames.push(name);
+    //         }
+    //     });
+
+    //     questionNames.forEach(function (name) {
+    //         if (!$('input[name="' + name + '"]:checked').length) {
+    //             isValid = false;
+    //             missingFields.push(name.replace(/_/g, ' ').toUpperCase());
+    //         }
+    //     });
+
+    //     // ===============================
+    //     // Stop if invalid
+    //     // ===============================
+    //     if (!isValid) {
+    //         alert(
+    //             'Please complete all required PAR-Q questions before proceeding.\n\nMissing:\n- ' +
+    //             missingFields.join('\n- ')
+    //         );
+    //         return; // 🚫 block modal
+    //     }
+
+    //     // ===============================
+    //     // Compute result ONLY if valid
+    //     // ===============================
+    //     const result = getPARQResult();
+
+    //     $('#parqResultStatus')
+    //         .removeClass()
+    //         .addClass(
+    //             result === 'Cleared for Physical Activity'
+    //                 ? 'result-cleared'
+    //                 : 'result-clearance'
+    //         )
+    //         .text(result);
+
+    //     // Consent logic (only if clearance required)
+    //     if (result === 'Medical Clearance Required') {
+    //         $('#parqConsentSection').show();
+    //         $('#parqContactSection').hide();
+    //         $('#parqConfirmSubmit').prop('disabled', true);
+    //         $('input[name="parqConsentChoice"]').prop('checked', false);
+    //         $('#parqContactNumber').val('');
+    //     } else {
+    //         $('#parqConsentSection').hide();
+    //         $('#parqContactSection').hide();
+    //         $('#parqConfirmSubmit').prop('disabled', false);
+    //     }
+
+    //     $('#parqResultModal').fadeIn();
+    // });
+
     $('#submitForm').on('click', function () {
-        let isValid = true;
-        let missingFields = [];
 
-        // ===============================
-        // Patient Info Validation
-        // ===============================
-        const patientName = $('input[name="patient_name"]').val().trim();
-        const ageSex = $('input[name="age_sex"]').val().trim();
-        const examDate = $('input[name="exam_date"]').val();
-
-        if (!patientName) {
-            isValid = false;
-            missingFields.push('Patient Name');
-        }
-
-        if (!ageSex) {
-            isValid = false;
-            missingFields.push('Age / Sex');
-        }
-
-        if (!examDate) {
-            isValid = false;
-            missingFields.push('Examination Date');
-        }
-
-        // ===============================
-        // PAR-Q Questions ONLY (exclude consent)
-        // ===============================
-        const questionNames = [];
-
-        $('input[type="radio"]').each(function () {
-            const name = $(this).attr('name');
-
-            // 🚫 Exclude consent radios
-            if (name === 'parqConsentChoice') return;
-
-            if (!questionNames.includes(name)) {
-                questionNames.push(name);
-            }
-        });
-
-        questionNames.forEach(function (name) {
-            if (!$('input[name="' + name + '"]:checked').length) {
-                isValid = false;
-                missingFields.push(name.replace(/_/g, ' ').toUpperCase());
-            }
-        });
-
-        // ===============================
-        // Stop if invalid
-        // ===============================
-        if (!isValid) {
-            alert(
-                'Please complete all required PAR-Q questions before proceeding.\n\nMissing:\n- ' +
-                missingFields.join('\n- ')
-            );
-            return; // 🚫 block modal
-        }
-
-        // ===============================
-        // Compute result ONLY if valid
-        // ===============================
         const result = getPARQResult();
 
         $('#parqResultStatus')
@@ -269,7 +299,7 @@ $(document).ready(function () {
             )
             .text(result);
 
-        // Consent logic (only if clearance required)
+        // Handle consent UI only based on result
         if (result === 'Medical Clearance Required') {
             $('#parqConsentSection').show();
             $('#parqContactSection').hide();
@@ -285,6 +315,9 @@ $(document).ready(function () {
         $('#parqResultModal').fadeIn();
     });
 
+
+
+   
 
 
     // ===========================

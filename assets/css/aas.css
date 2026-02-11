@@ -551,10 +551,10 @@ body {
     }
 }
 
-.severity-VeryLow { background: #22c55e; }
+.severity-LowRisk { background: #22c55e; }
 .severity-Low { background: #84cc16; color: #000; }
-.severity-Moderate { background: #f59e0b; }
-.severity-High { background: #f97316; }
+.severity-ModerateRisk { background: #f59e0b; }
+.severity-HighRisk { background: #f97316; }
 .severity-VeryHigh { background: #dc2626; }
 
 
@@ -657,3 +657,5 @@ body {
         font-weight: 600;
     }
 }
+
+
