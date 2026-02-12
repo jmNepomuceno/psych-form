@@ -303,12 +303,15 @@ $(document).ready(function () {
         if (result === 'Medical Clearance Required') {
             $('#parqConsentSection').show();
             $('#parqContactSection').hide();
+            $('#parqContactSectionEmer').hide();
             $('#parqConfirmSubmit').prop('disabled', true);
             $('input[name="parqConsentChoice"]').prop('checked', false);
             $('#parqContactNumber').val('');
+            $('#parqContactNumberEmer').val('');
         } else {
             $('#parqConsentSection').hide();
             $('#parqContactSection').hide();
+            $('#parqContactSectionEmer').hide();
             $('#parqConfirmSubmit').prop('disabled', false);
         }
 
@@ -328,8 +331,10 @@ $(document).ready(function () {
 
         if (this.value === 'agree') {
             $('#parqContactSection').slideDown();
+            $('#parqContactSectionEmer').slideDown();
         } else {
             $('#parqContactSection').slideUp();
+            $('#parqContactSectionEmer').slideUp();
             $('#parqContactNumber').val('');
         }
     });
@@ -353,6 +358,7 @@ $(document).ready(function () {
 
         formData.result = $('#parqResultStatus').text();
         formData.contact_number = $('#parqContactNumber').val() || null;
+        formData.contact_number_emer = $('#parqContactNumberEmer').val() || null;
 
         console.log(formData);
 
@@ -366,8 +372,14 @@ $(document).ready(function () {
                 $('#parqResultModal').fadeOut();
                 $('input').val('').prop('checked', false);
 
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

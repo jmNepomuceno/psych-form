@@ -249,11 +249,13 @@ $(document).ready(function() {
         if (['Moderate Risk', 'High Risk', 'Possible Dependence'].includes(severity)) {
             $('#auditConsentSection').show();
             $('#auditContactSection').hide();
+            $('#auditContactSectionEmer').hide();
             $('#auditConfirmSubmit').prop('disabled', true);
             $('input[name="auditConsentChoice"]').prop('checked', false);
             $('#auditContactNumber').val('');
         } else {
             $('#auditConsentSection').hide();
+            $('#auditContactSectionEmer').hide();
             $('#auditContactSection').hide();
             $('#auditConfirmSubmit').prop('disabled', false);
         }
@@ -269,9 +271,11 @@ $(document).ready(function() {
 
         if (this.value === 'agree') {
             $('#auditContactSection').slideDown();
+            $('#auditContactSectionEmer').slideDown();
         } else {
             $('#auditContactSection').slideUp();
-            $('#auditContactNumber').val('');
+            $('#auditContactSectionEmer').slideUp();
+            $('#auditContactNumberEmer').val('');
         }
     });
 
@@ -290,6 +294,7 @@ $(document).ready(function() {
         formData.total_score = $('#auditResultScore').text();
         formData.severity = $('#auditResultSeverity').text();
         formData.contact_number = $('#auditContactNumber').val() || null;
+        formData.contact_number_emer = $('#auditContactNumberEmer').val() || null;
 
         console.log(formData);
 
@@ -303,8 +308,14 @@ $(document).ready(function() {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

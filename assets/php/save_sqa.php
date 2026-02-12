@@ -39,6 +39,7 @@ try {
     $total_score    = isset($_POST['total_score']) ? (int)$_POST['total_score'] : null;
     $severity       = $_POST['severity'] ?? '';
     $contact_number = $_POST['contact_number'] ?? null;
+    $contact_number_emer = $_POST['contact_number_emer'] ?? null;
 
     // ====== INSERT QUERY ======
     $sql = "INSERT INTO psqi_assessment (
@@ -47,14 +48,14 @@ try {
                 q6a, q6b, q6c, q6d, q6e, q6f, q6g, q6h, q6i, q6j, q6j_other,
                 q7, q8,
                 q9,
-                total_score, severity, contact_number
+                total_score, severity, contact_number, emergency_contact
             ) VALUES (
                 :patient_name, :age_sex, :exam_date,
                 :q1, :q2, :q3, :q4, :q5,
                 :q6a, :q6b, :q6c, :q6d, :q6e, :q6f, :q6g, :q6h, :q6i, :q6j, :q6j_other,
                 :q7, :q8,
                 :q9,
-                :total_score, :severity, :contact_number
+                :total_score, :severity, :contact_number, :emergency_contact
             )";
 
     $stmt = $pdo->prepare($sql);
@@ -89,6 +90,7 @@ try {
     $stmt->bindParam(':total_score', $total_score, PDO::PARAM_INT);
     $stmt->bindParam(':severity', $severity, PDO::PARAM_STR);
     $stmt->bindParam(':contact_number', $contact_number, PDO::PARAM_STR);
+    $stmt->bindParam(':emergency_contact', $contact_number_emer, PDO::PARAM_STR);
 
     $stmt->execute();
 

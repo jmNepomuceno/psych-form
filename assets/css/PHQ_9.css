@@ -329,10 +329,10 @@ body {
 }
 
 /* Severity colors */
-.severity-Minimal { background: #2ecc71; }
-.severity-Mild { background: #f1c40f; color: #000; }
-.severity-Moderate { background: #e67e22; }
-.severity-Severe { background: #e74c3c; }
+.severity-minimal { background: #2ecc71; }
+.severity-mild { background: #f1c40f; color: #000; }
+.severity-moderate { background: #e67e22; }
+.severity-severe { background: #e74c3c; }
 
 .severity-table {
     width: 100%;

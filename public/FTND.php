@@ -190,13 +190,17 @@
                 <input type="text" id="ftndContactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="ftndContactSectionEmer" class="contact-section" style="display:none;">
+                <label for="ftndContactNumberEmer">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="ftndContactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <button id="ftndConfirmSubmit" class="btn-primary" disabled>
                 Confirm & Save
             </button>
 
         </div>
     </div>
-
 
 
     <script src="../assets/js/FTND.js"></script>

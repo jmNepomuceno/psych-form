@@ -71,7 +71,7 @@ $(document).ready(function () {
     $('input[type="radio"]').on('change', function () {
 
         let totalScore = 0;
-
+        let severity = ""
         // Column score totals (actual score, not count)
         let columnTotals = {
             0: 0,
@@ -164,9 +164,9 @@ $(document).ready(function () {
         /* ===============================
         COMPUTE SCORE (ONLY IF VALID)
         =============================== */
-        let totalScore = parseInt($('#totalScore').val() || 0);
-        let severity = getPHQSeverity(totalScore);
-
+        totalScore = parseInt($('#totalScore').val() || 0);
+        severity = getPHQSeverity(totalScore);
+        
         /* ===============================
         HIGHLIGHT SEVERITY TABLE
         =============================== */
@@ -198,6 +198,7 @@ $(document).ready(function () {
         } else {
             $('#consentSection').hide();
             $('#contactSection').hide();
+            $('#contactSectionEmer').hide();
             $('#confirmSubmit').prop('disabled', false);
         }
 
@@ -213,9 +214,12 @@ $(document).ready(function () {
         $('#confirmSubmit').prop('disabled', false);
         if ($(this).val() === 'agree') {
             $('#contactSection').slideDown();
+            $('#contactSectionEmer').slideDown();
         } else {
             $('#contactSection').slideUp();
+            $('#contactSectionEmer').slideUp();
             $('#contactNumber').val('');
+            $('#contactNumberEmer').val('');
         }
     });
 
@@ -237,6 +241,7 @@ $(document).ready(function () {
         formData.total_score = totalScore;
         formData.severity = severity;
         formData.contact_number = $('#contactNumber').val() || null;
+        formData.contact_number_emer = $('#contactNumberEmer').val() || null;
 
         $.ajax({
             url: '../assets/php/save_phq9.php',
@@ -249,7 +254,13 @@ $(document).ready(function () {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             },
             error: function () {
                 alert('Error saving PHQ-9');

@@ -18,5 +18,9 @@ function showNotificationModal(title, message, type = 'info') {
 }
 
 $('.modal-ok-btn, .close-btn').on('click', function () {
+    if($(this).text() === 'Return'){
+       window.location.href = 'http://192.168.42.15:8035/public/home.php';
+       this.text("OK")
+    }
     $('#login-modal').removeClass('show');
 }); 

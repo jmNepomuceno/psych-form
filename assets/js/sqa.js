@@ -309,11 +309,13 @@ $(document).ready(function() {
         if (severity === 'Poor' || severity === 'Very Poor') {
             $('#psqiFollowUpSection').show();
             $('#psqiContactSection').hide();
+            $('#psqiContactSectionEmer').hide();
             $('#psqiConfirmSubmit').prop('disabled', true);
             $('input[name="psqiFollowUpChoice"]').prop('checked', false);
             $('#psqiContactNumber').val('');
         } else {
             $('#psqiFollowUpSection').hide();
+            $('#psqiContactSectionEmer').hide();
             $('#psqiContactSection').hide();
             $('#psqiConfirmSubmit').prop('disabled', false);
         }
@@ -330,8 +332,10 @@ $(document).ready(function() {
 
         if (this.value === 'agree') {
             $('#psqiContactSection').slideDown();
+            $('#psqiContactSectionEmer').slideDown();
         } else {
             $('#psqiContactSection').slideUp();
+            $('#psqiContactSectionEmer').slideUp();
             $('#psqiContactNumber').val('');
         }
     });
@@ -375,6 +379,7 @@ $(document).ready(function() {
 
         // Optional contact number
         formData.contact_number = $('#psqiContactNumber').val() || null;
+        formData.contact_number_emer = $('#psqiContactNumberEmer').val() || null;
 
         console.log('Form Data to submit:', formData);
 
@@ -395,9 +400,14 @@ $(document).ready(function() {
                 $('#totalScore').val('');
                 $('.severity-table tbody tr').removeClass('active');
                 $('#psqiResultModal').fadeOut();
-
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
-
+                
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);

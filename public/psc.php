@@ -243,6 +243,11 @@
                 <input type="text" id="pssContactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="pssContactSectionEmer" class="contact-section" style="display:none;">
+                <label for="pssContactNumberEmer">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="pssContactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <button id="pssConfirmSubmit" class="btn-primary" disabled>
                 Confirm & Save
             </button>

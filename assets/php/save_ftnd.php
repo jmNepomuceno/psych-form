@@ -18,15 +18,16 @@ try {
     $total_score    = isset($_POST['total_score']) ? (int)$_POST['total_score'] : 0;
     $severity       = $_POST['severity'] ?? '';
     $contact_number = $_POST['contact_number'] ?? null;
+    $contact_number_emer = $_POST['contact_number_emer'] ?? null;
 
     $sql = "INSERT INTO fagerstrom_test (
                 patient_name, age_sex, exam_date,
                 q1, q2, q3, q4, q5, q6,
-                total_score, severity, contact_number
+                total_score, severity, contact_number, emergency_contact
             ) VALUES (
                 :patient_name, :age_sex, :exam_date,
                 :q1, :q2, :q3, :q4, :q5, :q6,
-                :total_score, :severity, :contact_number
+                :total_score, :severity, :contact_number, :emergency_contact
             )";
 
     $stmt = $pdo->prepare($sql);
@@ -43,6 +44,7 @@ try {
     $stmt->bindParam(':total_score', $total_score, PDO::PARAM_INT);
     $stmt->bindParam(':severity', $severity, PDO::PARAM_STR);
     $stmt->bindParam(':contact_number', $contact_number, PDO::PARAM_STR);
+    $stmt->bindParam(':emergency_contact', $contact_number_emer, PDO::PARAM_STR);
 
     $stmt->execute();
 

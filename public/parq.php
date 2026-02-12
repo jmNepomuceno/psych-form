@@ -496,6 +496,11 @@
                 <input type="text" id="parqContactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="parqContactSectionEmer" class="contact-section" style="display:none;">
+                <label for="parqContactNumberEmer">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="parqContactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <!-- CONFIRM BUTTON -->
             <button id="parqConfirmSubmit" class="btn-primary" disabled>
                 Confirm & Save

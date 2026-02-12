@@ -271,12 +271,14 @@ $(document).ready(function() {
         if (severity === 'High' || severity === 'Very High') {
             $('#ftndConsentSection').show();
             $('#ftndContactSection').hide();
+            $('#ftndContactSectionEmer').hide();
             $('#ftndConfirmSubmit').prop('disabled', true);
             $('input[name="ftndConsentChoice"]').prop('checked', false);
             $('#ftndContactNumber').val('');
         } else {
             $('#ftndConsentSection').hide();
             $('#ftndContactSection').hide();
+            $('#ftndContactSectionEmer').hide();
             $('#ftndConfirmSubmit').prop('disabled', false);
         }
 
@@ -288,10 +290,13 @@ $(document).ready(function() {
         $('#ftndConfirmSubmit').prop('disabled', false);
 
         if (this.value === 'agree') {
+            $('#ftndContactSectionEmer').slideDown();
             $('#ftndContactSection').slideDown();
         } else {
+            $('#ftndContactSectionEmer').slideUp();
             $('#ftndContactSection').slideUp();
             $('#ftndContactNumber').val('');
+            $('#ftndContactNumberEmer').val('');
         }
     });
 
@@ -309,6 +314,7 @@ $(document).ready(function() {
         formData.total_score = $('#ftndResultScore').text();
         formData.severity = $('#ftndResultSeverity').text();
         formData.contact_number = $('#ftndContactNumber').val() || null;
+        formData.contact_number_emer = $('#ftndContactNumberEmer').val() || null;
 
         $.ajax({
             url: '../assets/php/save_ftnd.php',
@@ -320,7 +326,14 @@ $(document).ready(function() {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
+
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });

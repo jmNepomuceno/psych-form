@@ -261,6 +261,11 @@
                 <input type="text" id="contactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="contactSectionEmer" class="contact-section" style="display:none;">
+                <label for="contactNumberEmer">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="contactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <button id="confirmSubmit" class="btn-primary" disabled>
                 Confirm & Save
             </button>

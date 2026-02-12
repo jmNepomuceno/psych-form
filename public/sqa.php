@@ -308,6 +308,11 @@
                 <input type="text" id="psqiContactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="psqiContactSectionEmer" class="contact-section" style="display:none;">
+                <label for="psqiContactNumbeEmerr">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="psqiContactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <button id="psqiConfirmSubmit" class="btn-primary" disabled>
                 Confirm & Save
             </button>

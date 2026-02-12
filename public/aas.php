@@ -242,6 +242,11 @@
                 <input type="text" id="auditContactNumber" placeholder="09XXXXXXXXX">
             </div>
 
+            <div id="auditContactSectionEmer" class="contact-section" style="display:none;">
+                <label for="auditContactNumberEmer">Emergency Contact Mobile Number (Optional)</label>
+                <input type="text" id="auditContactNumberEmer" placeholder="09XXXXXXXXX">
+            </div>
+
             <button id="auditConfirmSubmit" class="btn-primary" disabled>
                 Confirm & Save
             </button>

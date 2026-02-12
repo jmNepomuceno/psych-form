@@ -9,6 +9,7 @@ try {
     $exam_date      = $_POST['exam_date'] ?? null;
     $severity       = $_POST['severity'] ?? '';
     $contact_number = $_POST['contact_number'] ?? null;
+    $contact_number_emer = $_POST['contact_number_emer'] ?? null;
 
     $q1 = isset($_POST['q1']) ? (int)$_POST['q1'] : 0;
     $q2 = isset($_POST['q2']) ? (int)$_POST['q2'] : 0;
@@ -33,13 +34,13 @@ try {
         q1, q2, q3, q4, q5, q6, q7, q8, q9,
         difficulty, total_score,
         physician, license_no, physician_date,
-        severity, contact_number
+        severity, contact_number , emergency_contact
     ) VALUES (
         :patient_name, :age_sex, :exam_date,
         :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9,
         :difficulty, :total_score,
         :physician, :license_no, :physician_date,
-        :severity, :contact_number
+        :severity, :contact_number , :emergency_contact
     )";
 
     $stmt = $pdo->prepare($sql);
@@ -64,6 +65,7 @@ try {
     $stmt->bindParam(':physician_date', $physician_date);
     $stmt->bindParam(':severity', $severity, PDO::PARAM_STR);
     $stmt->bindParam(':contact_number', $contact_number, PDO::PARAM_STR);
+    $stmt->bindParam(':emergency_contact', $contact_number_emer, PDO::PARAM_STR);
 
     // ====== EXECUTE QUERY ======
     $stmt->execute();

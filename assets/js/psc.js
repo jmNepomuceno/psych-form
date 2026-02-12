@@ -218,12 +218,15 @@ $(document).ready(function() {
         if (severity === 'High Stress') {
             $('#pssConsentSection').show();
             $('#pssContactSection').hide();
+            $('#pssContactSectionEmer').hide();
             $('#pssConfirmSubmit').prop('disabled', true);
             $('input[name="pssConsentChoice"]').prop('checked', false);
             $('#pssContactNumber').val('');
+            $('#pssContactNumberEmer').val('');
         } else {
             $('#pssConsentSection').hide();
             $('#pssContactSection').hide();
+            $('#pssContactSectionEmer').hide();
             $('#pssConfirmSubmit').prop('disabled', false);
         }
 
@@ -237,9 +240,12 @@ $(document).ready(function() {
 
         if (this.value === 'agree') {
             $('#pssContactSection').slideDown();
+            $('#pssContactSectionEmer').slideDown();
         } else {
             $('#pssContactSection').slideUp();
+            $('#pssContactSectionEmer').slideUp();
             $('#pssContactNumber').val('');
+            $('#pssContactNumberEmer').val('');
         }
     });
 
@@ -258,6 +264,7 @@ $(document).ready(function() {
         formData.total_score = $('#pssResultScore').text();
         formData.severity = $('#pssResultSeverity').text();
         formData.contact_number = $('#pssContactNumber').val() || null;
+        formData.contact_number_emer = $('#pssContactNumberEmer').val() || null;
 
 
         console.log(formData)
@@ -272,8 +279,15 @@ $(document).ready(function() {
                 $('input').val('').prop('checked', false);
                 $('#totalScore').val('');
 
+                $('.modal-ok-btn').text("Return")
+                showNotificationModal(
+                    'Successfuly Submitted',
+                    "",
+                    'success'
+                );
+
                 // Redirect to dashboard
-                window.location.href = 'http://192.168.42.15:8035/public/home.php';
+                // window.location.href = 'http://192.168.42.15:8035/public/home.php';
             }
         });
     });
