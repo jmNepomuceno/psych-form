@@ -348,7 +348,7 @@
                 </div>
 
                 <div class="modal-body suggestion-modal-body">
-
+                    <!-- ==================== SUBMIT SUGGESTION FORM ==================== -->
                     <form id="suggestionForm">
 
                         <!-- Hidden Fields -->
@@ -387,6 +387,181 @@
 
                     <!-- Response Message -->
                     <div id="suggestionResponse" class="mt-3"></div>
+
+                    <hr>
+
+                    <!-- ==================== SUGGESTIONS TABLE ==================== -->
+                    <h6 class="mt-3">All Suggestions</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="suggestionsTableModal">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Submitted By</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Admin Response</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Loaded dynamically via AJAX -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ==================== ADMIN RESPONSE MODAL ==================== -->
+                    <div class="modal fade" id="respondModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-header bg-primary text-white">
+                                    <h5 class="modal-title">Respond to Suggestion</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form id="respondForm">
+                                        <input type="hidden" name="concernID" id="respondConcernID">
+                                        <div class="mb-3">
+                                            <label id="respondModalSubject" class="form-label fw-bold"></label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="adminResponse" class="form-control" rows="4" placeholder="Type your response..." required></textarea>
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-success">Send Response</button>
+                                        </div>
+                                    </form>
+                                    <div id="responseMessage" class="mt-2"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CONCERN MODAL -->
+    <div class="modal fade concern-modal" 
+        id="concernModal" 
+        tabindex="-1" 
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content concern-modal-content">
+
+                <div class="modal-header concern-modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Submit a Concern
+                    </h5>
+                    <button type="button" 
+                            class="btn-close btn-close-white" 
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body concern-modal-body">
+
+                    <!-- ==================== SUBMIT CONCERN FORM ==================== -->
+                    <form id="concernForm">
+
+                        <!-- Hidden Fields -->
+                        <input type="hidden" name="bioID" 
+                            value="<?php echo $_SESSION['user'] ?? 0; ?>">
+
+                        <input type="hidden" name="fullName" 
+                            value="<?php echo $_SESSION['name'] ?? 'Guest'; ?>">
+
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" 
+                                name="subject" 
+                                class="form-control concern-input" 
+                                placeholder="Enter subject"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Your Concern</label>
+                            <textarea name="message" 
+                                    class="form-control concern-textarea" 
+                                    rows="4"
+                                    placeholder="Type your concern here..."
+                                    required></textarea>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" 
+                                    class="btn btn-danger concern-submit-btn">
+                                Submit Concern
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!-- Response Message -->
+                    <div id="concernResponse" class="mt-3"></div>
+
+                    <hr>
+
+                    <!-- ==================== CONCERNS TABLE ==================== -->
+                    <h6 class="mt-3">All Concerns</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="concernsTableModal">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Submitted By</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Admin Response</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Loaded via AJAX -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ==================== ADMIN RESPONSE MODAL ==================== -->
+                    <div class="modal fade" id="respondConcernModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title">Respond to Concern</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form id="respondConcernForm">
+                                        <input type="hidden" name="concernID" id="respondBugConcernID">
+                                        <div class="mb-3">
+                                            <label id="respondConcernModalSubject" class="form-label fw-bold"></label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="adminResponse" class="form-control" rows="4" placeholder="Type your response..." required></textarea>
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-success">Send Response</button>
+                                        </div>
+                                    </form>
+                                    <div id="respondConcernMessage" class="mt-2"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 

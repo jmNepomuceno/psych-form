@@ -293,48 +293,207 @@ $(document).ready(function () {
         initialized[cfg.key] = true;
     }
 
+    // ===== Submit Suggestion =====
     $('#suggestionForm').on('submit', function(e){
         e.preventDefault();
-
-        let formData = $(this).serialize();
 
         $.ajax({
             url: '../assets/php/save_suggestion.php',
             type: 'POST',
-            data: formData,
+            data: $(this).serialize(),
             dataType: 'json',
             beforeSend: function(){
-                $('.suggestion-submit-btn').prop('disabled', true)
-                    .text('Submitting...');
+                $('.suggestion-submit-btn').prop('disabled', true).text('Submitting...');
             },
-            success: function(response){
-
-                if(response.success){
-                    $('#suggestionResponse').html(
-                        '<div class="alert alert-success">Suggestion submitted successfully.</div>'
-                    );
-
+            success: function(res){
+                if(res.success){
+                    $('#suggestionResponse').html('<div class="alert alert-success">'+res.message+'</div>');
                     $('#suggestionForm')[0].reset();
-
-                    setTimeout(function(){
-                        $('#suggestionModal').modal('hide');
-                        $('#suggestionResponse').html('');
-                    }, 1500);
-
+                    loadSuggestionsModal(); // reload table
                 } else {
-                    $('#suggestionResponse').html(
-                        '<div class="alert alert-danger">'+response.message+'</div>'
-                    );
+                    $('#suggestionResponse').html('<div class="alert alert-danger">'+res.message+'</div>');
                 }
-
             },
             complete: function(){
-                $('.suggestion-submit-btn')
-                    .prop('disabled', false)
-                    .text('Submit Suggestion');
+                $('.suggestion-submit-btn').prop('disabled', false).text('Submit Suggestion');
             }
         });
+    });
 
+    // ===== Load Suggestions Table in Modal =====
+    function loadSuggestionsModal(){
+        $.ajax({
+            url: '../assets/php/get_suggestions.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                let tbody = '';
+                data.forEach((item,index) => {
+                    tbody += `<tr>
+                        <td>${index+1}</td>
+                        <td>${item.fullName}</td>
+                        <td>${item.subject}</td>
+                        <td>${item.message}</td>
+                        <td>${item.status}</td>
+                        <td>${item.adminResponse || '-'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary btn-respond" 
+                                data-id="${item.concernID}" 
+                                data-subject="${item.subject}">
+                                Respond
+                            </button>
+                        </td>
+                    </tr>`;
+                });
+                $('#suggestionsTableModal tbody').html(tbody);
+            }
+        });
+    }
+
+    // Initial load
+    loadSuggestionsModal();
+
+    // ===== Respond Button Click =====
+    $(document).on('click', '.btn-respond', function(){
+        let concernID = $(this).data('id');
+        let subject   = $(this).data('subject');
+        $('#respondConcernID').val(concernID);
+        $('#respondModalSubject').text(subject);
+        $('#respondModal').modal('show');
+    });
+
+    // ===== Submit Admin Response =====
+    $('#respondForm').on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: '../assets/php/save_suggestion_response.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function(){
+                $('#respondForm button[type="submit"]').prop('disabled', true).text('Sending...');
+            },
+            success: function(res){
+                if(res.success){
+                    $('#responseMessage').html('<div class="alert alert-success">'+res.message+'</div>');
+                    setTimeout(() => {
+                        $('#respondModal').modal('hide');
+                        $('#responseMessage').html('');
+                        $('#respondForm')[0].reset();
+                        loadSuggestionsModal(); // reload table
+                    }, 1200);
+                } else {
+                    $('#responseMessage').html('<div class="alert alert-danger">'+res.message+'</div>');
+                }
+            },
+            complete: function(){
+                $('#respondForm button[type="submit"]').prop('disabled', false).text('Send Response');
+            }
+        });
+    });
+
+    // ===== Submit Concern =====
+    $('#concernForm').on('submit', function(e){
+        e.preventDefault();
+
+        $.ajax({
+            url: '../assets/php/save_concern.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function(){
+                $('.concern-submit-btn').prop('disabled', true).text('Submitting...');
+            },
+            success: function(res){
+                if(res.success){
+                    $('#concernResponse').html('<div class="alert alert-success">'+res.message+'</div>');
+                    $('#concernForm')[0].reset();
+                    loadConcernsModal();
+                } else {
+                    $('#concernResponse').html('<div class="alert alert-danger">'+res.message+'</div>');
+                }
+            },
+            complete: function(){
+                $('.concern-submit-btn').prop('disabled', false).text('Submit Concern');
+            }
+        });
+    });
+
+    // ===== Load Concerns Table =====
+    function loadConcernsModal(){
+        $.ajax({
+            url: '../assets/php/get_concerns.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                let tbody = '';
+                data.forEach((item,index) => {
+                    tbody += `<tr>
+                        <td>${index+1}</td>
+                        <td>${item.fullName}</td>
+                        <td>${item.subject}</td>
+                        <td>${item.message}</td>
+                        <td>${item.status}</td>
+                        <td>${item.adminResponse || '-'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary btn-respond-concern" 
+                                data-id="${item.concernID}" 
+                                data-subject="${item.subject}">
+                                Respond
+                            </button>
+                        </td>
+                    </tr>`;
+                });
+                $('#concernsTableModal tbody').html(tbody);
+            }
+        });
+    }
+
+    // Initial load
+    loadConcernsModal();
+
+    // ===== Respond Button Click =====
+    $(document).on('click', '.btn-respond-concern', function(){
+        let concernID = $(this).data('id');
+        let subject   = $(this).data('subject');
+        $('#respondBugConcernID').val(concernID);
+        $('#respondConcernModalSubject').text(subject);
+        $('#respondConcernModal').modal('show');
+    });
+
+    // ===== Submit Admin Response for Concern =====
+    $(document).on('submit', '#respondConcernForm', function(e){
+        e.preventDefault();
+
+        let form = $(this); // the current form inside the modal
+         console.log('Form element:', form);             // logs the jQuery object
+        console.log('Serialized data:', form.serialize()); // logs the actual POST data
+        $.ajax({
+            url: '../assets/php/save_concern_response.php',
+            type: 'POST',
+            data: form.serialize(),
+            dataType: 'json',
+            beforeSend: function(){
+                form.find('button[type="submit"]').prop('disabled', true).text('Sending...');
+            },
+            success: function(res){
+                if(res.success){
+                    $('#respondConcernMessage').html('<div class="alert alert-success">'+res.message+'</div>');
+                    setTimeout(() => {
+                        $('#respondConcernModal').modal('hide');
+                        $('#respondConcernMessage').html('');
+                        form[0].reset();
+                        loadConcernsModal(); // reload table
+                    }, 1200);
+                } else {
+                    $('#respondConcernMessage').html('<div class="alert alert-danger">'+res.message+'</div>');
+                }
+            },
+            complete: function(){
+                form.find('button[type="submit"]').prop('disabled', false).text('Send Response');
+            }
+        });
     });
 
 
