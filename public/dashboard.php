@@ -1,3 +1,7 @@
+<?php 
+    include('../session.php');
+    include('../assets/connection/connection.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,6 +97,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -109,6 +114,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -125,6 +131,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -157,6 +164,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -173,6 +181,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -189,6 +198,7 @@
                         <th>No.</th>
                         <th>Full Name</th>
                         <th>Contact</th>
+                        <th>Emergency Contact</th>
                         <th>Score</th>
                         <th>Severity</th>
                         <th>Date</th>
@@ -244,6 +254,143 @@
 
             </div>
 
+        </div>
+    </div>
+
+    <!-- ADMIN ANNOUNCEMENT MODAL -->
+    <div class="modal fade admin-announcement-modal" 
+        id="adminAnnouncementModal" 
+        tabindex="-1" 
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content admin-announcement-content">
+
+                <div class="modal-header admin-announcement-header">
+                    <h5 class="modal-title">
+                        System Dashboard Announcement
+                    </h5>
+                    <button type="button" 
+                            class="btn-close btn-close-white" 
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body admin-announcement-body">
+
+                    <p class="announcement-greeting">
+                        Good Day,
+                    </p>
+
+                    <p>
+                        This is the viewing of Dashboards for the <strong>Administrators</strong>.
+                    </p>
+
+                    <div class="admin-list-wrapper">
+                        <p class="admin-list-title">Current System Administrators:</p>
+                        <ol class="admin-list">
+                            <li>Dra. Charines Reyes – PHU Head</li>
+                            <li>Ms. Fritzie Jane Wandas – Psychologist</li>
+                            <li>Dra. Maria Fatima Martinez – Psychiatrist</li>
+                            <li>John Marvin Nepomuceno – System Admin Developer</li>
+                        </ol>
+                    </div>
+
+                    <div class="announcement-divider"></div>
+
+                    <p>
+                        As of <strong>February 13, 2026</strong>, the initial system
+                        requirements have been successfully completed and launched.
+                    </p>
+
+                    <p>
+                        The system is continuously evolving. We welcome your
+                        <strong>suggestions, comments, and reports of visual concerns</strong>
+                        within this system.
+                    </p>
+
+                    <p class="announcement-highlight">
+                        Kindly use the dashboard icons to submit your feedback. (Still under development. Thank you)
+                    </p>
+
+                </div>
+
+                <div class="modal-footer admin-announcement-footer">
+                    <button type="button" 
+                            class="btn btn-primary announcement-close-btn" 
+                            data-bs-dismiss="modal">
+                        Understood
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SUGGESTION MODAL -->
+    <div class="modal fade suggestion-modal" 
+        id="suggestionModal" 
+        tabindex="-1" 
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content suggestion-modal-content">
+
+                <div class="modal-header suggestion-modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-lightbulb-fill me-2"></i>
+                        Submit a Suggestion
+                    </h5>
+                    <button type="button" 
+                            class="btn-close btn-close-white" 
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body suggestion-modal-body">
+
+                    <form id="suggestionForm">
+
+                        <!-- Hidden Fields -->
+                        <input type="hidden" name="bioID" 
+                            value="<?php echo $_SESSION['user'] ?? 0; ?>">
+
+                        <input type="hidden" name="fullName" 
+                            value="<?php echo $_SESSION['name'] ?? 'Guest'; ?>">
+
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" 
+                                name="subject" 
+                                class="form-control suggestion-input" 
+                                placeholder="Enter subject"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Your Suggestion</label>
+                            <textarea name="message" 
+                                    class="form-control suggestion-textarea" 
+                                    rows="4"
+                                    placeholder="Type your suggestion here..."
+                                    required></textarea>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" 
+                                    class="btn btn-primary suggestion-submit-btn">
+                                Submit Suggestion
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!-- Response Message -->
+                    <div id="suggestionResponse" class="mt-3"></div>
+
+                </div>
+
+            </div>
         </div>
     </div>
 

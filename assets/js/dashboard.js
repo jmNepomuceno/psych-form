@@ -1,4 +1,44 @@
 $(document).ready(function () {
+    // Prevent repeated showing (per session)
+    if (!sessionStorage.getItem("adminAnnouncementShown")) {
+
+        var adminAnnouncementModal = new bootstrap.Modal(
+            document.getElementById('adminAnnouncementModal'),
+            {
+                backdrop: 'static',
+                keyboard: false
+            }
+        );
+
+        adminAnnouncementModal.show();
+
+        sessionStorage.setItem("adminAnnouncementShown", "true");
+    }
+
+     // Announcement
+    $('#btnAnnouncement').on('click', function(){
+        var modal = new bootstrap.Modal(
+            document.getElementById('adminAnnouncementModal')
+        );
+        modal.show();
+    });
+
+    // Suggestion
+    $('#btnSuggestion').on('click', function(){
+        var modal = new bootstrap.Modal(
+            document.getElementById('suggestionModal')
+        );
+        modal.show();
+    });
+
+    // Concern
+    $('#btnConcern').on('click', function(){
+        var modal = new bootstrap.Modal(
+            document.getElementById('concernModal')
+        );
+        modal.show();
+    });
+
 
     /* ==========================
        FORM CONFIGURATION
@@ -14,6 +54,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -31,6 +72,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -48,6 +90,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -104,6 +147,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -121,6 +165,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -138,6 +183,7 @@ $(document).ready(function () {
                 rowNumber(),
                 col('patient_name'),
                 contactCol(),
+                emerContactCol(),
                 col('total_score'),
                 severityCol(),
                 col('created_at'),
@@ -247,6 +293,51 @@ $(document).ready(function () {
         initialized[cfg.key] = true;
     }
 
+    $('#suggestionForm').on('submit', function(e){
+        e.preventDefault();
+
+        let formData = $(this).serialize();
+
+        $.ajax({
+            url: '../assets/php/save_suggestion.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            beforeSend: function(){
+                $('.suggestion-submit-btn').prop('disabled', true)
+                    .text('Submitting...');
+            },
+            success: function(response){
+
+                if(response.success){
+                    $('#suggestionResponse').html(
+                        '<div class="alert alert-success">Suggestion submitted successfully.</div>'
+                    );
+
+                    $('#suggestionForm')[0].reset();
+
+                    setTimeout(function(){
+                        $('#suggestionModal').modal('hide');
+                        $('#suggestionResponse').html('');
+                    }, 1500);
+
+                } else {
+                    $('#suggestionResponse').html(
+                        '<div class="alert alert-danger">'+response.message+'</div>'
+                    );
+                }
+
+            },
+            complete: function(){
+                $('.suggestion-submit-btn')
+                    .prop('disabled', false)
+                    .text('Submit Suggestion');
+            }
+        });
+
+    });
+
+
 });
 
 /* ==========================
@@ -262,13 +353,21 @@ function rowNumber() {
 function col(name) {
     return {
         data: name,
-        render: v => v || 'N/A'
+        render: v => (v ?? '') === '' ? 'N/A' : v
     };
 }
+
 
 function contactCol() {
     return {
         data: 'contact_number',
+        render: v => v || 'N/A'
+    };
+}
+
+function emerContactCol(){
+    return {
+        data: 'emergency_contact',
         render: v => v || 'N/A'
     };
 }

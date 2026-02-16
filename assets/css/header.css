@@ -161,3 +161,63 @@
 }
 
 
+/* ===========================
+   HEADER ICON ACTIONS
+=========================== */
+
+.app-header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 20px;
+}
+
+/* Base Icon Button */
+.app-header .header-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+/* Announcement */
+.app-header .icon-announcement {
+    background: #e7f1ff;
+    color: #0d6efd;
+}
+
+.app-header .icon-announcement:hover {
+    background: #0d6efd;
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* Suggestion */
+.app-header .icon-suggestion {
+    background: #fff8e1;
+    color: #f0ad4e;
+}
+
+.app-header .icon-suggestion:hover {
+    background: #f0ad4e;
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* Concern */
+.app-header .icon-concern {
+    background: #fdecea;
+    color: #dc3545;
+}
+
+.app-header .icon-concern:hover {
+    background: #dc3545;
+    color: #fff;
+    transform: scale(1.08);
+}

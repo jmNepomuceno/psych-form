@@ -56,11 +56,11 @@
             </div>
             <div>
                 Age/Sex:
-                <input type="text" name="age_sex" class="text-input small">
+                <input type="text" name="age_sex" class="text-input small" placeholder="24/M">
             </div>
             <div>
                 Date:
-                <input type="date" name="exam_date" class="text-input small">
+                <input type="date" name="exam_date" class="text-input small" placeholder="04/28/2001">
             </div>
         </div>
 

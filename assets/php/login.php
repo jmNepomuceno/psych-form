@@ -34,12 +34,25 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && trim($_POST["usern
             $_SESSION["Authorized"] = "Yes";
             $_SESSION["role"] = "";
 
+            // Insert SUCCESS log
+            $stmt = $pdo->prepare("INSERT INTO login_logs (username, login_status, bioID) VALUES (:username, :status, :bioID)");
+            $stmt->execute([
+                ':username' => $account->FullName,
+                ':status' => 'SUCCESS',
+                ':bioID' => $account->BiometricID
+            ]);
 
             // echo json_encode($_SESSION);
             echo "/public/home.php";
         }
     }
     else {
+        // Insert FAILED log
+        $stmt = $pdo->prepare("INSERT INTO login_logs (username, login_status) VALUES (:username, :status)");
+        $stmt->execute([
+            ':username' => $biousername,
+            ':status' => 'FAILED'
+        ]);
         echo "invalid";
     }
 

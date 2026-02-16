@@ -142,7 +142,7 @@
             </div>
 
             <!-- Reports -->
-            <?php if($_SESSION['user'] == 2078 || $_SESSION['user'] == 3858){ ?>
+            <?php if($_SESSION['user'] == 2078 || $_SESSION['user'] == 3858 || $_SESSION['user'] == 5057 || $_SESSION['user'] == 3671){ ?>
                 <div class="dashboard-card card-secondary">
                     <h2>Reports & Dashboard</h2>
                     <p>

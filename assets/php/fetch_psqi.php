@@ -2,7 +2,7 @@
 include('../connection/connection.php');
 header('Content-Type: application/json');
 
-$sql = "SELECT id, patient_name, total_score, created_at, total_score, created_at, severity, contact_number
+$sql = "SELECT id, patient_name, total_score, created_at, total_score, created_at, severity, contact_number, emergency_contact
         FROM psqi_assessment
         ORDER BY created_at DESC";
 

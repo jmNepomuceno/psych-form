@@ -55,7 +55,7 @@
             </div>
             <div>
                 Age/Sex:
-                <input type="text" name="age_sex" class="text-input small">
+                <input type="text" name="age_sex" class="text-input small" placeholder="24/M">
             </div>
             <div>
                 Date:

@@ -11,7 +11,7 @@
     // $result = $soap->GetESignature($param)->GetESignatureResult;
     // echo "<pre>"; print_r($result); echo "</pre>";
 
-    $sql = "SELECT * FROM gad_7";
+    $sql = "DESCRIBE user_concerns";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

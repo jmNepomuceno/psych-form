@@ -24,7 +24,7 @@
                 <span>Digital Assessment Forms System</span>
             </h1>
             <p class="description">
-                A secure digital platform for psychological and health screening assessments in support of patient care and well-being.
+                A secure digital platform designed for hospital personnel to conduct psychological and health screening assessments in support of clinical care and patient well-being.
             </p>
 
             <!-- 3D Platform Circle -->

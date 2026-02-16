@@ -544,3 +544,127 @@ table.dataTable tbody tr:hover {
         font-size: 1.35rem;
     }
 }
+
+
+/* ================================
+   ADMIN ANNOUNCEMENT MODAL STYLING
+================================ */
+
+/* Target only this modal */
+#adminAnnouncementModal .admin-announcement-content {
+    border-radius: 14px;
+    overflow: hidden;
+    border: none;
+}
+
+/* Header */
+#adminAnnouncementModal .admin-announcement-header {
+    background: linear-gradient(135deg, #0d6efd, #084298);
+    color: #fff;
+    padding: 18px 24px;
+}
+
+#adminAnnouncementModal .admin-announcement-header .modal-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Body */
+#adminAnnouncementModal .admin-announcement-body {
+    padding: 30px 35px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* Greeting */
+#adminAnnouncementModal .announcement-greeting {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Admin List Section */
+#adminAnnouncementModal .admin-list-wrapper {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+#adminAnnouncementModal .admin-list-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#adminAnnouncementModal .admin-list li {
+    margin-bottom: 6px;
+}
+
+/* Divider */
+#adminAnnouncementModal .announcement-divider {
+    height: 1px;
+    background: #dee2e6;
+    margin: 20px 0;
+}
+
+/* Highlight Text */
+#adminAnnouncementModal .announcement-highlight {
+    background: #e7f1ff;
+    padding: 10px 14px;
+    border-left: 4px solid #0d6efd;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Footer */
+#adminAnnouncementModal .admin-announcement-footer {
+    padding: 15px 24px;
+    background: #f8f9fa;
+}
+
+#adminAnnouncementModal .announcement-close-btn {
+    padding: 6px 18px;
+    font-weight: 500;
+}
+
+
+/* ===========================
+   SUGGESTION MODAL STYLING
+=========================== */
+
+#suggestionModal .suggestion-modal-content {
+    border-radius: 14px;
+    border: none;
+}
+
+#suggestionModal .suggestion-modal-header {
+    background: linear-gradient(135deg, #f0ad4e, #d39e00);
+    color: #fff;
+    padding: 18px 22px;
+}
+
+#suggestionModal .suggestion-modal-body {
+    padding: 25px 30px;
+}
+
+#suggestionModal .suggestion-input,
+#suggestionModal .suggestion-textarea {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#suggestionModal .suggestion-input:focus,
+#suggestionModal .suggestion-textarea:focus {
+    border-color: #f0ad4e;
+    box-shadow: 0 0 0 2px rgba(240,173,78,0.2);
+}
+
+#suggestionModal .suggestion-submit-btn {
+    padding: 6px 18px;
+    font-weight: 500;
+}
+
+#suggestionModal #suggestionResponse {
+    font-size: 14px;
+}

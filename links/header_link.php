@@ -24,6 +24,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
 <!-- <script src="../assets/websocket/script.js"></script> -->
 
 <!-- <link rel="stylesheet" href="../css/navbar.css"> -->
